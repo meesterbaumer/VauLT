@@ -1,6 +1,6 @@
 import React from "react"
 import { Route } from "react-router-dom"
-import { MetalProvider } from "./Entries/metalProvider"
+import { MetalProvider } from "./Entries/MetalProvider"
 
 
 export const ApplicationViews = (props) => {
