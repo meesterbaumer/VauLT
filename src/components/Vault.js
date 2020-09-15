@@ -13,6 +13,7 @@ export const Vault = () => (
       />
     </div>
     <NavBar />
+    
     <ApplicationViews />
   </>
 );
