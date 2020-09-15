@@ -1,3 +1,13 @@
+.metals {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1rem;
+  justify-content: center;
+}
+
 .singleMetal {
   border: solid black 2px;
+  text-align: center;
+  padding: .5rem;
+  margin: .5rem;
 }

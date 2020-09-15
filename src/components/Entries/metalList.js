@@ -9,15 +9,14 @@ export const MetalList = () => {
   const { metalTestValue, getTestValue } = useContext(MetalApiTestContext);
 
   useEffect(() => {
-    getMetals().then(getTestValue);
+    getMetals();
+    getTestValue();
   }, []);
-console.log(metals)
-console.log(metalTestValue)
+  console.log(metals);
+  console.log(metalTestValue);
   return (
     <div className="metals">
       {metals.map((m) => {
-        
-
         return <Metal key={m.id} metal={m} metalValue={metalTestValue} />;
       })}
     </div>
