@@ -4,7 +4,7 @@ import React from "react";
 import "./Metal.css";
 
 export const Metal = ({ metal, metalValue }) => (
-  <div className="metal">
+  <div className="singleMetal">
     <div className="metal__name">{metal.name}</div>
     <div className="metal__weight">{metal.weight}</div>
     <div className="metal__currentValue">{metalValue.rates}</div>

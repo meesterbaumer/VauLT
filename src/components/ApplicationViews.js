@@ -1,24 +1,25 @@
-import React from "react"
-import { Route } from "react-router-dom"
-import { MetalProvider } from "./Entries/MetalProvider"
-
+import React from "react";
+import { Route } from "react-router-dom";
+import { MetalProvider } from "./Entries/MetalProvider";
+import { MetalList } from "./Entries/MetalList";
+import { Dashboard } from "./Dashboard/Dashboard";
+import { MetalApiTestProvider } from "./MetalAPI/MetalApiTestProvider";
 
 export const ApplicationViews = (props) => {
-    return (
-        <>
-            <LocationProvider>
-                {/* Render the location list when http://localhost:3000/ */}
-                <Route exact path="/">
-                    <LocationList />
-                </Route>
-            </LocationProvider>
+  return (
+    <>
+      {/* Render the location list when http://localhost:3000/ */}
+      <Route exact path="/">
+        <Dashboard />
+      </Route>
 
-            <AnimalProvider>
-                {/* Render the animal list when http://localhost:3000/animals */}
-                <Route path="/animals">
-                    <AnimalList />
-                </Route>
-            </AnimalProvider>
-        </>
-    )
-}
+      <MetalApiTestProvider>
+        <MetalProvider>
+          <Route exact path="/collection">
+            <MetalList />
+          </Route>
+        </MetalProvider>
+      </MetalApiTestProvider>
+    </>
+  );
+};

@@ -1,16 +1,18 @@
 import React from "react";
-import { MetalList } from "./Entries/MetalList";
-import { MetalProvider } from "./Entries/MetalProvider";
 import "./Vault.css";
-import { MetalApiTestProvider } from "./MetalAPI/MetalApiTestProvider";
+import { NavBar } from "./nav/NavBar";
+import { ApplicationViews } from "./ApplicationViews";
 
 export const Vault = () => (
   <>
-    <h1>VauLT</h1>
-    <MetalApiTestProvider>
-      <MetalProvider>
-        <MetalList />
-      </MetalProvider>
-    </MetalApiTestProvider>
+    <div className="logoContainer">
+      <img
+        src={require("../Images/VauLT_LOGO.png")}
+        className="vaultLogo"
+        alt="Girl in a jacket"
+      />
+    </div>
+    <NavBar />
+    <ApplicationViews />
   </>
 );
