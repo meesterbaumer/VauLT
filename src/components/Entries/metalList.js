@@ -30,6 +30,7 @@ export const MetalList = () => {
   console.log(value)
   // const rate = value.timestamp
   // console.log(rate)
+  // test
   
   
   return (
