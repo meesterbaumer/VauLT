@@ -10,8 +10,8 @@ export const Metal = ({ metal, metalValue }) => {
   return (
     <div className="singleMetal">
       <div className="metal__name">{metal.name}</div>
-      <div className="metal__weight">{metal.weight}</div>
-      <div className="metal__currentValue">{correctRate}</div>
+  <div className="metal__weight">Weight: {metal.weight} {metal.unit.name}</div>
+      <div className="metal__currentValue">Current Value: $ {parseFloat(correctRate * metal.weight).toFixed(2)}</div>
     </div>
   );
 };

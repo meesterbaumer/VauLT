@@ -9,16 +9,41 @@ export const MetalList = () => {
   const { metalTestValue, getTestValue } = useContext(MetalApiTestContext);
 
   useEffect(() => {
-    getMetals();
-    getTestValue();
+    getTestValue().then(getMetals);
   }, []);
   console.log(metals);
   console.log(metalTestValue);
+
+  const CollectionWeight = metals.map(metal => {
+    return metal.weight
+  })
+  console.log(CollectionWeight)
+  
+  let collectionWeightTotal = 0
+  for (const piece of CollectionWeight) {
+    collectionWeightTotal = collectionWeightTotal + piece
+  }
+  console.log(collectionWeightTotal)
+  
+  
+  const value = metalTestValue
+  console.log(value)
+  // const rate = value.timestamp
+  // console.log(rate)
+  
+  
   return (
-    <div className="metals">
-      {metals.map((m) => {
-        return <Metal key={m.id} metal={m} metalValue={metalTestValue} />;
-      })}
-    </div>
+    <>
+      <div className="ValueContainer">
+        <div className="collectionHeader">Collection</div>
+  <div className="collectionValue">{collectionWeightTotal}</div>
+        <div className="collectionUpdate">timestamp goes here</div>
+      </div>
+      <div className="metals">
+        {metals.map((m) => {
+          return <Metal key={m.id} metal={m} metalValue={metalTestValue} />;
+        })}
+      </div>
+    </>
   );
 };
