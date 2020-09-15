@@ -18,15 +18,25 @@ export const MetalList = () => {
     return metal.weight
   })
   console.log(CollectionWeight)
-  const collectionWeightTotal = 0
   
-
-
+  let collectionWeightTotal = 0
+  for (const piece of CollectionWeight) {
+    collectionWeightTotal = collectionWeightTotal + piece
+  }
+  console.log(collectionWeightTotal)
+  
+  
+  const value = metalTestValue
+  console.log(value)
+  // const rate = value.timestamp
+  // console.log(rate)
+  
+  
   return (
     <>
       <div className="ValueContainer">
         <div className="collectionHeader">Collection</div>
-        <div className="collectionValue">Collection Value goes here</div>
+  <div className="collectionValue">{collectionWeightTotal}</div>
         <div className="collectionUpdate">timestamp goes here</div>
       </div>
       <div className="metals">
