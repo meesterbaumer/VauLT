@@ -1,7 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import { MetalProvider } from "./Entries/metalProvider";
-import { MetalList } from "./Entries/metalList";
+import { MetalProvider } from "./Entries/MetalProvider";
+import { MetalList } from "./Entries/MetalList";
 import { Dashboard } from "./Dashboard/Dashboard";
 import { MetalApiTestProvider } from "./MetalAPI/MetalApiTestProvider";
 
