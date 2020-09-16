@@ -11,6 +11,8 @@ export const MetalProvider = (props) => {
       .then(setMetals);
   };
 
+  console.log("hi")
+
   return (
     <MetalContext.Provider
       value={{

@@ -1,7 +1,7 @@
 // this component allows you to edit the individual metal entry that displays to the DOM
 
 import React from "react";
-import "./metal.css";
+import "./Metal.css";
 
 export const Metal = ({ metal, metalValue }) => {
   console.log(metalValue);
