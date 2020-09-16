@@ -1,5 +1,7 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
+import { MetalApiGetter } from "../MetalAPI/MetalApiGetter";
+import { MetalApiTestProvider } from "../MetalAPI/MetalApiTestProvider";
 import "./Login.css";
 
 export const Login = (props) => {
@@ -20,6 +22,8 @@ export const Login = (props) => {
     existingUserCheck().then((exists) => {
       if (exists && exists.password === password.current.value) {
         localStorage.setItem("vault_user", exists.id);
+
+
         props.history.push("/");
       } else if (exists && exists.password !== password.current.value) {
         passwordDialog.current.showModal();

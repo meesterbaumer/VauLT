@@ -5,6 +5,7 @@ import { NavBar } from "./nav/NavBar";
 import { Login } from "./auth/Login";
 import { Register } from "./auth/Register";
 import "./Vault.css";
+import { MetalApiTestProvider } from "./MetalAPI/MetalApiTestProvider";
 
 export const Vault = () => (
   <>
@@ -20,9 +21,11 @@ export const Vault = () => (
                   alt="vaultLogo"
                 />
               </div>
-              <NavBar />
 
-              <ApplicationViews />
+              <MetalApiTestProvider>
+                <NavBar />
+                <ApplicationViews />
+              </MetalApiTestProvider>
             </>
           );
         } else {

@@ -6,10 +6,10 @@ import "./Metal.css";
 
 export const MetalList = () => {
   const { metals, getMetals } = useContext(MetalContext);
-  const { metalTestValue, getTestValue } = useContext(MetalApiTestContext);
+  const { metalTestValue } = useContext(MetalApiTestContext);
 
   useEffect(() => {
-    getTestValue().then(getMetals);
+    getMetals();
   }, []);
   console.log(metals);
   console.log(metalTestValue);
@@ -26,8 +26,8 @@ export const MetalList = () => {
   console.log(collectionWeightTotal)
   
   
-  const value = metalTestValue
-  console.log(value)
+  
+  console.log(metalTestValue[0].timestamp)
   // const rate = value.timestamp
   // console.log(rate)
   // test

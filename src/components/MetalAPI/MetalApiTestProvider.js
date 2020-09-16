@@ -10,6 +10,11 @@ export const MetalApiTestProvider = (props) => {
       .then((r) => r.json())
       .then(setTestValue);
   };
+  useEffect(() => {
+    getTestValue()
+  }, [])
+  console.log(metalTestValue)
+
   return (
     <MetalApiTestContext.Provider
       value={{
@@ -20,4 +25,6 @@ export const MetalApiTestProvider = (props) => {
       {props.children}
     </MetalApiTestContext.Provider>
   );
+
+
 };
