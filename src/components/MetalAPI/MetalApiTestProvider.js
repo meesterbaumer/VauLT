@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 export const MetalApiTestContext = React.createContext();
 
 export const MetalApiTestProvider = (props) => {
-  const [metalTestValue, setTestValue] = useState([]);
+  const [metalTestValue, setTestValue] = useState([{"rates": {}}]);
 
   const getTestValue = () => {
     return fetch("http://localhost:8089/metalApiData")
