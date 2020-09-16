@@ -11,3 +11,20 @@
   padding: .5rem;
   margin: .5rem;
 }
+
+.collectionContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.collectionValue {
+  background-color: slategray;
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  padding: 1rem;
+  border: 2px solid black;
+  text-align: center;
+  justify-content: center;
+}
+

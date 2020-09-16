@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
-import { MetalApiGetter } from "../MetalAPI/MetalApiGetter";
 import { MetalApiTestProvider } from "../MetalAPI/MetalApiTestProvider";
 import "./Login.css";
 
@@ -32,6 +31,8 @@ export const Login = (props) => {
       }
     });
   };
+
+
 
   return (
     <main className="container--login">
