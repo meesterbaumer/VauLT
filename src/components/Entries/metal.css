@@ -18,8 +18,9 @@
 }
 
 .collectionValue {
-  background-color: slategray;
+  background-color: rgba(0, 0, 0, 0.247);
   display: flex;
+  border-radius: 10px;
   flex-direction: column;
   width: fit-content;
   padding: 1rem;

@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from "react";
-import { MetalContext } from "./MetalProvider";
+import { MetalContext } from "./metalProvider";
 import { MetalApiTestContext } from "../MetalAPI/MetalApiTestProvider";
 import { Metal } from "./Metal";
-import "./Metal.css";
+import "./metal.css";
 
 export const MetalList = () => {
   const { metals, getMetals } = useContext(MetalContext);
