@@ -6,7 +6,7 @@ export const MetalProvider = (props) => {
   const [metals, setMetals] = useState([]);
 
   const getMetals = () => {
-    return fetch("http://localhost:8088/metals?_expand=metalType&_expand=pieceType&_expand=unit&_expand=collection")
+    return fetch("http://localhost:8088/metals?_expand=metalType&_expand=pieceType&_expand=unit&_expand=collection&_expand=user")
       .then((r) => r.json())
       .then(setMetals);
   };
