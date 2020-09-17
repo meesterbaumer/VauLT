@@ -1,7 +1,13 @@
+.navContainer {
+  display: flex;
+  justify-content: center;
+}
+
 .navbar {
   display: flex;
   flex-wrap: nowrap;
-  justify-content: center;
+  text-align: center;
+  margin: .5rem
 }
 
 .navbar__item {

@@ -4,7 +4,8 @@ import "./NavBar.css"
 
 export const NavBar = (props) => {
     return (
-        <ul className="navbar">
+        <div className="navContainer">
+            <div className="navbar">
             <li className="navbar__item active">
                 <Link className="navbar__link" to="/">Dashboard</Link>
             </li>
@@ -14,6 +15,7 @@ export const NavBar = (props) => {
             <li className="navbar__item">
                 <Link className="navbar__link" to="/logout">Logout</Link>
             </li>
-        </ul>
+        </div>
+        </div>
     )
 }

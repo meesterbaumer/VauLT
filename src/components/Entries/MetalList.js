@@ -15,9 +15,9 @@ export const MetalList = () => {
   console.log(metalTestValue[0]);
 
   const userMetals = metals.filter((m) => {
-    return m.userId === parseInt(localStorage.vault_user)
-  })
-  console.log(userMetals)
+    return m.userId === parseInt(localStorage.vault_user);
+  });
+  console.log(userMetals);
 
   const CollectionWeight = userMetals.map((metal) => {
     return metal.weight;
@@ -31,18 +31,18 @@ export const MetalList = () => {
   console.log(collectionWeightTotal);
 
   console.log(metalTestValue[0].rates.XAG);
-  console.log(parseInt(localStorage.vault_user))
-
+  console.log(parseInt(localStorage.vault_user));
 
   return (
     <>
+      {/* Main enclosing container Start */}
       <div className="collectionContainer">
         <div className="collectionValue">
           <div className="collectionHeader">Collection Value</div>
           <div className="collectionWorth">
             ${" "}
             {parseFloat(
-              1/metalTestValue[0].rates.XAG * collectionWeightTotal
+              (1 / metalTestValue[0].rates.XAG) * collectionWeightTotal
             ).toFixed(2)}
           </div>
           <div className="collectionUpdate">
@@ -52,12 +52,29 @@ export const MetalList = () => {
             )}
           </div>
         </div>
-      </div>
-
-      <div className="metals">
-        {userMetals.map((m) => {
-          return <Metal key={m.id} metal={m} metalValue={metalTestValue[0]} />;
-        })}
+        <div className="trioContainer">
+          <div className="newCollectionContainer">
+            <div>New Collection</div>
+            <button>New Collection</button>
+          </div>
+          <div className="changeCollectionContainer">
+            <div>View Collection</div>
+            <select id="changeCollection">
+              <option>Collection</option>
+            </select>
+          </div>
+          <div className="addPieceContainer">
+            <div>Add a piece</div>
+            <button>Add Item</button>
+          </div>
+        </div>
+        <div className="metals">
+          {userMetals.map((m) => {
+            return (
+              <Metal key={m.id} metal={m} metalValue={metalTestValue[0]} />
+            );
+          })}
+        </div>
       </div>
     </>
   );
