@@ -11,8 +11,8 @@ export const Dashboard = () => {
               scrolling="noscroll"
               title="chart"
               src="https://goldiraguide.org/chart/widget/chart-tabs.php?metal=silver&graph_width=220&graph_height=140&color_dark=000000&color_light=ffffff&color_graph=737373"
-              width="100%"
-              height="335"
+              width="240"
+              height="285"
             ></iframe>
         </div>
       </div>
