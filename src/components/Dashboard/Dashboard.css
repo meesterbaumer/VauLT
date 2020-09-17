@@ -1,0 +1,13 @@
+
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+
+.chartContainer {
+  display: flex;
+  justify-self: center;
+}
+

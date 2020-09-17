@@ -4,10 +4,10 @@ import apiKey from "../../Settings"
 export const MetalApiTestContext = React.createContext();
 
 export const MetalApiTestProvider = (props) => {
-  const [metalTestValue, setTestValue] = useState({"rates": {}});
+  const [metalTestValue, setTestValue] = useState([{"rates": {}}]);
 
   const getTestValue = () => {
-    return fetch(`https://cors-anywhere.herokuapp.com/https://metals-api.com/api/latest/?access_key=${apiKey.metalKey}&base=USD&symbols=XAU%2CXAG%2CXPD%2CXPT%2CXRH`)
+    return fetch("http://localhost:8089/metalApiData")
     .then((r) => r.json())
     .then(setTestValue);
   };
@@ -29,4 +29,3 @@ export const MetalApiTestProvider = (props) => {
 
 
 };
-// http://localhost:8089/metalApiData
