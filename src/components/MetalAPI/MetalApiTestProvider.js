@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import apiKey from "../../Settings"
 
 export const MetalApiTestContext = React.createContext();
 
@@ -6,7 +7,7 @@ export const MetalApiTestProvider = (props) => {
   const [metalTestValue, setTestValue] = useState({"rates": {}});
 
   const getTestValue = () => {
-    return fetch("https://cors-anywhere.herokuapp.com/https://metals-api.com/api/latest/?access_key=7zpizjmz4m4d0pa0qly7h1q5qmhiiv2339zicxd8p9vijcbppahrobyz37dd&base=USD&symbols=XAU%2CXAG%2CXPD%2CXPT%2CXRH")
+    return fetch(`https://cors-anywhere.herokuapp.com/https://metals-api.com/api/latest/?access_key=${apiKey.metalKey}&base=USD&symbols=XAU%2CXAG%2CXPD%2CXPT%2CXRH`)
     .then((r) => r.json())
     .then(setTestValue);
   };
