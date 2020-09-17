@@ -6,7 +6,7 @@ import "./Metal.css";
 export const Metal = ({ metal, metalValue }) => {
   console.log(metalValue);
   const rates = metalValue.rates
-  const correctRate = rates.XAG*1000
+  const correctRate = 1/rates.XAG
   return (
     <div className="singleMetal">
       <div className="metal__name">{metal.name}</div>

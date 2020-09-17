@@ -20,6 +20,14 @@ export const ApplicationViews = (props) => {
           </Route>
         </MetalProvider>
       </MetalApiTestProvider>
+
+      <Route path="/logout" render={
+                (props) => {
+                    localStorage.removeItem("vault_user")
+                    props.history.push("/login")
+                }
+            } />
+
     </>
   );
 };
