@@ -4,7 +4,7 @@ import { MetalProvider } from "./Entries/MetalProvider";
 import { MetalList } from "./Entries/MetalList";
 import { Dashboard } from "./Dashboard/Dashboard";
 import { MetalApiTestProvider } from "./MetalAPI/MetalApiTestProvider";
-
+// test
 export const ApplicationViews = (props) => {
   return (
     <>

@@ -22,10 +22,10 @@ export const Vault = () => (
                 />
               </div>
 
-              <MetalApiTestProvider>
+              {/* <MetalApiTestProvider> */}
                 <NavBar />
                 <ApplicationViews />
-              </MetalApiTestProvider>
+              {/* </MetalApiTestProvider> */}
             </>
           );
         } else {

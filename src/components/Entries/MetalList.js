@@ -14,7 +14,12 @@ export const MetalList = () => {
   console.log(metals);
   console.log(metalTestValue);
 
-  const CollectionWeight = metals.map((metal) => {
+  const userMetals = metals.filter((m) => {
+    return m.userId === parseInt(localStorage.vault_user)
+  })
+  console.log(userMetals)
+
+  const CollectionWeight = userMetals.map((metal) => {
     return metal.weight;
   });
   console.log(CollectionWeight);
@@ -25,7 +30,9 @@ export const MetalList = () => {
   }
   console.log(collectionWeightTotal);
 
-  console.log(metalTestValue[0].rates.XAG);
+  console.log(metalTestValue.rates.XAG);
+  console.log(parseInt(localStorage.vault_user))
+
 
   return (
     <>
@@ -35,12 +42,12 @@ export const MetalList = () => {
           <div className="collectionWorth">
             ${" "}
             {parseFloat(
-              metalTestValue[0].rates.XAG * 1000 * collectionWeightTotal
+              metalTestValue.rates.XAG * 1000 * collectionWeightTotal
             ).toFixed(2)}
           </div>
           <div className="collectionUpdate">
             Data current as of{" "}
-            {new Date(metalTestValue[0].timestamp * 1000).toLocaleString(
+            {new Date(metalTestValue.timestamp * 1000).toLocaleString(
               "en-US"
             )}
           </div>
@@ -48,7 +55,7 @@ export const MetalList = () => {
       </div>
 
       <div className="metals">
-        {metals.map((m) => {
+        {userMetals.map((m) => {
           return <Metal key={m.id} metal={m} metalValue={metalTestValue} />;
         })}
       </div>
