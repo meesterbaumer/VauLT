@@ -62,3 +62,14 @@
   padding: 2px;
 }
 
+.dialog--addPiece {
+  background-color: rgba(0, 0, 0, 0.829);
+  margin-top: 20rem;
+  height: 20rem;
+  width: 20rem;
+  overflow: auto;
+}
+
+.formText {
+  color: white;
+}
