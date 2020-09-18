@@ -6,6 +6,7 @@ import { Dashboard } from "./Dashboard/Dashboard";
 import { MetalApiTestProvider } from "./MetalAPI/MetalApiTestProvider";
 import { UnitProvider } from "./Units/UnitProvider";
 import { CollectionProvider } from "./Collections/collectionProvider";
+import { MetalTypesProvider } from "./Entries/MetalTypesProvider";
 // test
 export const ApplicationViews = (props) => {
   return (
@@ -16,15 +17,17 @@ export const ApplicationViews = (props) => {
       </Route>
 
       <MetalApiTestProvider>
-        <CollectionProvider>
-          <UnitProvider>
-            <MetalProvider>
-              <Route exact path="/collection">
-                <MetalList />
-              </Route>
-            </MetalProvider>
-          </UnitProvider>
-        </CollectionProvider>
+        <MetalTypesProvider>
+          <CollectionProvider>
+            <UnitProvider>
+              <MetalProvider>
+                <Route exact path="/collection">
+                  <MetalList />
+                </Route>
+              </MetalProvider>
+            </UnitProvider>
+          </CollectionProvider>
+        </MetalTypesProvider>
       </MetalApiTestProvider>
 
       <Route

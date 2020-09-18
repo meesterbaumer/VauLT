@@ -1,18 +1,21 @@
 import React, { useContext, useEffect, useRef } from "react";
-import { MetalContext } from "./MetalProvider";
 import { MetalApiTestContext } from "../MetalAPI/MetalApiTestProvider";
+import { CollectionContext } from "../Collections/collectionProvider";
+import { MetalContext } from "./MetalProvider";
+import { UnitContext } from "../Units/UnitProvider";
+import { MetalTypesContext } from "./MetalTypesProvider";
 import { Metal } from "./Metal";
 import "./Metal.css";
-import { UnitContext } from "../Units/UnitProvider";
-import { CollectionContext } from "../Collections/collectionProvider";
 
 export const MetalList = () => {
   const { metals, getMetals, addMetals } = useContext(MetalContext);
-  const { metalTestValue } = useContext(MetalApiTestContext);
-  const { unitOptions, getUnits } = useContext(UnitContext);
   const { collectionOptions, getCollections } = useContext(CollectionContext);
+  const { unitOptions, getUnits } = useContext(UnitContext);
+  const { metalTypes, getMetalTypes } = useContext(MetalTypesContext)
+  const { metalTestValue } = useContext(MetalApiTestContext);
 
   const pieceName = useRef();
+  const metalType = useRef();
   const weight = useRef();
   const unit = useRef();
   const qty = useRef();
@@ -24,11 +27,13 @@ export const MetalList = () => {
     getMetals();
     getUnits();
     getCollections();
+    getMetalTypes()
   }, []);
   console.log(metals);
   console.log(metalTestValue[0]);
   console.log(unitOptions);
   console.log(collectionOptions);
+  console.log(metalTypes)
 
   const userMetals = metals.filter((m) => {
     return m.userId === parseInt(localStorage.vault_user);
@@ -64,34 +69,34 @@ export const MetalList = () => {
 
   const addItem = () => {
 
-    const collectionId = parseInt(chooseCollection.current.value)
-    const metalTypeId = parseInt(chooseCollection.current.value)
+    // const collectionId = parseInt(chooseCollection.current.value)
+    // const metalTypeId = parseInt(chooseCollection.current.value)
 
-        if (unit.current.value !== 0 || chooseCollection.current.value !== 0) {
-      existingUserCheck().then(() => {
-        fetch("http://localhost:8088/users", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: email.current.value,
-            password: password.current.value,
-            firstName: firstName.current.value,
-            lastName: lastName.current.value,
-          }),
-        })
-          .then((_) => _.json())
-          .then((createdUser) => {
-            if (createdUser.hasOwnProperty("id")) {
-              localStorage.setItem("vault_user", createdUser.id);
-              props.history.push("/");
-            }
-          });
-      });
-    } else {
-      ;
-    }
+    //     if (unit.current.value !== 0 || chooseCollection.current.value !== 0) {
+    //   existingUserCheck().then(() => {
+    //     fetch("http://localhost:8088/users", {
+    //       method: "POST",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //       body: JSON.stringify({
+    //         email: email.current.value,
+    //         password: password.current.value,
+    //         firstName: firstName.current.value,
+    //         lastName: lastName.current.value,
+    //       }),
+    //     })
+    //       .then((_) => _.json())
+    //       .then((createdUser) => {
+    //         if (createdUser.hasOwnProperty("id")) {
+    //           localStorage.setItem("vault_user", createdUser.id);
+    //           props.history.push("/");
+    //         }
+    //       });
+    //   });
+    // } else {
+    //   ;
+    // }
 
   };
 
@@ -117,6 +122,25 @@ export const MetalList = () => {
               required
               autoFocus
             />
+          </fieldset>
+          <fieldset>
+            <label className="formText" htmlFor="metalTypes">
+              Type of Metal
+            </label>
+            <select
+              ref={metalType}
+              type="select"
+              name="metalTypes"
+              className="form-control"
+              required
+            >
+              <option value="0">Choose the type of metal</option>
+              {metalTypes.map((mt) => (
+                <option key={mt.id} value={mt.id}>
+                  {mt.name}
+                </option>
+              ))}
+            </select>
           </fieldset>
           <fieldset>
             <label className="formText" htmlFor="weight">
