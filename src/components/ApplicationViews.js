@@ -4,6 +4,10 @@ import { MetalProvider } from "./Entries/MetalProvider";
 import { MetalList } from "./Entries/MetalList";
 import { Dashboard } from "./Dashboard/Dashboard";
 import { MetalApiTestProvider } from "./MetalAPI/MetalApiTestProvider";
+import { UnitProvider } from "./Units/UnitProvider";
+import { CollectionProvider } from "./Collections/collectionProvider";
+import { MetalTypesProvider } from "./Entries/MetalTypesProvider";
+import { PieceTypesProvider } from "./Entries/PieceTypesProvider";
 // test
 export const ApplicationViews = (props) => {
   return (
@@ -14,20 +18,28 @@ export const ApplicationViews = (props) => {
       </Route>
 
       <MetalApiTestProvider>
-        <MetalProvider>
-          <Route exact path="/collection">
-            <MetalList />
-          </Route>
-        </MetalProvider>
+        <MetalTypesProvider>
+          <CollectionProvider>
+            <UnitProvider>
+              <MetalProvider>
+                <PieceTypesProvider>
+                  <Route exact path="/collection">
+                    <MetalList />
+                  </Route>
+                </PieceTypesProvider>
+              </MetalProvider>
+            </UnitProvider>
+          </CollectionProvider>
+        </MetalTypesProvider>
       </MetalApiTestProvider>
 
-      <Route path="/logout" render={
-                (props) => {
-                    localStorage.removeItem("vault_user")
-                    props.history.push("/login")
-                }
-            } />
-
+      <Route
+        path="/logout"
+        render={(props) => {
+          localStorage.removeItem("vault_user");
+          props.history.push("/login");
+        }}
+      />
     </>
   );
 };
