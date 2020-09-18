@@ -23,12 +23,19 @@ export const MetalProvider = (props) => {
     }).then(getMetals);
   };
 
+  const deleteMetals = (metalId) => {
+    return fetch(`http://localhost:8088/metals/${metalId}`, {
+      method: "DELETE",
+    }).then(getMetals);
+  };
+
   return (
     <MetalContext.Provider
       value={{
         metals,
         getMetals,
         addMetals,
+        deleteMetals,
       }}
     >
       {props.children}
