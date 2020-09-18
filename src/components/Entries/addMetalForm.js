@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { MetalContext } from "./MetalProvider";
-import { MetalApiTestContext } from "../MetalAPI/MetalApiTestProvider";
 import { Metal } from "./Metal";
 import "./Metal.css";
 import { UnitContext } from "../Units/UnitProvider";
 import { CollectionContext } from "../Collections/collectionProvider";
 
-export const MetalList = () => {
+export const addMetalForm = () => {
   const { metals, getMetals, addMetals } = useContext(MetalContext);
   const { metalTestValue } = useContext(MetalApiTestContext);
   const { unitOptions, getUnits } = useContext(UnitContext);
