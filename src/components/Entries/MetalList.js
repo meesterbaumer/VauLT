@@ -275,6 +275,7 @@ export const MetalList = () => {
               type="number"
               name="purchasePrice"
               className="form-control"
+              step=".01"
               placeholder="13.00"
               required
             />
