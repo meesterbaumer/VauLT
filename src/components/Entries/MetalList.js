@@ -9,6 +9,7 @@ import { Metal } from "./Metal";
 import "./Metal.css";
 import { PieceTypesContext } from "./PieceTypesProvider";
 
+
 // Function to list all metals for the current User
 export const MetalList = () => {
   // Setting all data with useContext()
@@ -139,7 +140,7 @@ export const MetalList = () => {
         <div className="trioContainer">
           <div className="newCollectionContainer">
             <div>New Collection</div>
-            <button>New Collection</button>
+            <button id="newCollection">New Collection</button>
           </div>
           <div className="changeCollectionContainer">
             <div>View Collection</div>
