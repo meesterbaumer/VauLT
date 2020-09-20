@@ -8,7 +8,7 @@ import { UnitProvider } from "./Units/UnitProvider";
 import { CollectionProvider } from "./Collections/collectionProvider";
 import { MetalTypesProvider } from "./Entries/MetalTypesProvider";
 import { PieceTypesProvider } from "./Entries/PieceTypesProvider";
-import { ShowCollectionModal } from "./Collections/CollectionForm";
+
 // test
 export const ApplicationViews = (props) => {
   return (
@@ -25,7 +25,7 @@ export const ApplicationViews = (props) => {
               <MetalProvider>
                 <PieceTypesProvider>
                   <Route exact path="/collection">
-                    <ShowCollectionModal />
+                    
                     <MetalList />
                   </Route>
                 </PieceTypesProvider>

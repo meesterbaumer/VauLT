@@ -8,6 +8,7 @@ import { MetalTypesContext } from "./MetalTypesProvider";
 import { Metal } from "./Metal";
 import "./Metal.css";
 import { PieceTypesContext } from "./PieceTypesProvider";
+import { NewCollectionButtonClicked } from "../Collections/CollectionForm";
 
 
 // Function to list all metals for the current User
@@ -78,6 +79,13 @@ export const MetalList = () => {
 
     addPieceDialog.current.showModal();
   };
+
+  const newCollectionButtonClicked = (e) => {
+    e.preventDefault()
+
+    
+  }
+
   // add a piece end
 
   const addItem = () => {
@@ -140,7 +148,7 @@ export const MetalList = () => {
         <div className="trioContainer">
           <div className="newCollectionContainer">
             <div>New Collection</div>
-            <button id="newCollection">New Collection</button>
+            <button onClick={NewCollectionButtonClicked} id="newCollection">New Collection</button>
           </div>
           <div className="changeCollectionContainer">
             <div>View Collection</div>
