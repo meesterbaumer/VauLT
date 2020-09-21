@@ -4,9 +4,14 @@
   flex-direction: column;
   text-align: center;
   align-items: center;
+  
 }
 
 .chartContainer {
+  border: solid 2px black;
+  background-color: rgba(0, 0, 0, 0.247);
+  padding: 1rem;
+  border-radius: 20px;
   display: flex;
   justify-self: center;
 }
