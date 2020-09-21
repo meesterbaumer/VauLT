@@ -9,12 +9,13 @@ import { Metal } from "./Metal";
 import "./Metal.css";
 import { PieceTypesContext } from "./PieceTypesProvider";
 
-
 // Function to list all metals for the current User
 export const MetalList = () => {
   // Setting all data with useContext()
   const { metals, getMetals, addMetals } = useContext(MetalContext);
-  const { collectionOptions, getCollections, addCollections } = useContext(CollectionContext);
+  const { collectionOptions, getCollections, addCollections } = useContext(
+    CollectionContext
+  );
   const { unitOptions, getUnits } = useContext(UnitContext);
   const { metalTypes, getMetalTypes } = useContext(MetalTypesContext);
   const { pieceTypes, getPieceTypes } = useContext(PieceTypesContext);
@@ -30,8 +31,9 @@ export const MetalList = () => {
   const piecePurchasedPrice = useRef();
   const chooseCollection = useRef();
   const addPieceDialog = useRef();
-  const newCollectionDialog = useRef()
-  const collectionName = useRef()
+  const newCollectionDialog = useRef();
+  const collectionName = useRef();
+  const chosenCollectionName = useRef();
 
   // useEffect to get all necessary data from providers
   useEffect(() => {
@@ -51,6 +53,10 @@ export const MetalList = () => {
   const userCollections = collectionOptions.filter((c) => {
     return c.userId === parseInt(localStorage.vault_user);
   });
+
+  const userSelectedCollection = userMetals.filter((m) => {
+    return m.collectionId === parseInt(chosenCollectionName.current.value)
+  })
 
   // Function to retrieve total collection weight
   const CollectionWeight = userMetals.map((metal) => {
@@ -83,7 +89,7 @@ export const MetalList = () => {
     const name = collectionName.current.value;
     const userId = parseInt(localStorage.vault_user);
 
-    console.log("Testing")
+    console.log("Testing");
 
     if (name !== 0) {
       addCollections({
@@ -94,6 +100,13 @@ export const MetalList = () => {
       window.alert("Be sure to complete all sections");
     }
   };
+
+  const changeCollection = () => {
+    console.log("works");
+    return <>
+    <div>Hello</div>
+    </>
+  }
 
   // add collection function END
 
@@ -176,8 +189,22 @@ export const MetalList = () => {
           </div>
           <div className="changeCollectionContainer">
             <div>View Collection</div>
-            <select id="changeCollection">
-              <option>Collection</option>
+
+            <select
+              ref={chosenCollectionName}
+              onChange={changeCollection}
+              id="changeCollectionContainer"
+              type="select"
+              name="collectionNames"
+              className="form-control"
+              required
+            >
+              <option value="0">Choose</option>
+              {userCollections.map((uc) => (
+                <option key={uc.id} value={uc.id}>
+                  {uc.name}
+                </option>
+              ))}
             </select>
           </div>
           <div className="addPieceContainer">
@@ -192,12 +219,16 @@ export const MetalList = () => {
 
         {/* Metal List START */}
 
+
         <div className="metals">
-          {userMetals.map((m) => {
-            return (
-              <Metal key={m.id} metal={m} metalValue={metalTestValue[0]} />
-            );
-          })}
+          
+            {userMetals.map((m) => {
+              return (
+                <Metal key={m.id} metal={m} metalValue={metalTestValue[0]} />
+              );
+            })}
+            
+            
         </div>
       </div>
 
