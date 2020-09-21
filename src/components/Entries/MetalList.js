@@ -13,7 +13,9 @@ import { PieceTypesContext } from "./PieceTypesProvider";
 export const MetalList = () => {
   // Setting all data with useContext()
   const { metals, getMetals, addMetals } = useContext(MetalContext);
-  const { collectionOptions, getCollections, addCollections } = useContext(CollectionContext);
+  const { collectionOptions, getCollections, addCollections } = useContext(
+    CollectionContext
+  );
   const { unitOptions, getUnits } = useContext(UnitContext);
   const { metalTypes, getMetalTypes } = useContext(MetalTypesContext);
   const { pieceTypes, getPieceTypes } = useContext(PieceTypesContext);
@@ -52,7 +54,6 @@ export const MetalList = () => {
     return c.userId === parseInt(localStorage.vault_user);
   });
 
-  
 
   // Function to retrieve total collection weight
   const CollectionWeight = userMetals.map((metal) => {
@@ -85,7 +86,7 @@ export const MetalList = () => {
     const name = collectionName.current.value;
     const userId = parseInt(localStorage.vault_user);
 
-    console.log("Testing")
+    console.log("Testing");
 
     if (name !== 0) {
       addCollections({
@@ -185,7 +186,7 @@ export const MetalList = () => {
           </div>
           <div className="changeCollectionContainer">
             <div>View Collection</div>
-            
+
             <select
               ref={chosenCollectionName}
               onChange={changeCollection}
@@ -201,7 +202,6 @@ export const MetalList = () => {
                   {uc.name}
                 </option>
               ))}
-              
 
             </select>
           </div>
@@ -217,12 +217,16 @@ export const MetalList = () => {
 
         {/* Metal List START */}
 
+
         <div className="metals">
-          {userMetals.map((m) => {
-            return (
-              <Metal key={m.id} metal={m} metalValue={metalTestValue[0]} />
-            );
-          })}
+          
+            {userMetals.map((m) => {
+              return (
+                <Metal key={m.id} metal={m} metalValue={metalTestValue[0]} />
+              );
+            })}
+            
+            
         </div>
       </div>
 
