@@ -8,7 +8,7 @@ export const Metal = ({ metal, metalValue }) => {
   const { deleteMetals } = useContext(MetalContext);
   const { deleteConfirmDialog } = useRef();
 
-  
+
   const rates = metalValue.rates;
   const correctRate = 1 / rates.XAG;
 
