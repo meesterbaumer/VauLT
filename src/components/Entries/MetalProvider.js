@@ -33,6 +33,7 @@ export const MetalProvider = (props) => {
     <MetalContext.Provider
       value={{
         metals,
+        setMetals,
         getMetals,
         addMetals,
         deleteMetals,
