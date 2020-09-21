@@ -71,6 +71,15 @@
   overflow: auto;
 }
 
+.dialog--newCollection {
+  background-color: rgba(0, 0, 0, 0.75);
+  border-radius: 2rem;
+  margin-top: 20rem;
+  height: 15rem;
+  width: 20rem;
+  overflow: auto;
+}
+
 .formText {
   color: white;
 }

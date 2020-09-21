@@ -48,6 +48,7 @@ export const MetalList = () => {
 
   useEffect(() => {
     console.log(chosenCollection.current.value);
+    console.log(filteredMetals)
     const collectionFilteredMetals = userMetals.filter((m) => {
       return m.collectionId === parseInt(chosenCollection.current.value);
     });
@@ -276,7 +277,7 @@ export const MetalList = () => {
           <fieldset>
             <div className="buttonsContainer">
               <button className="Buttons" type="submit">
-                Add new colletion to VauLT
+                Add new collection to VauLT
               </button>
               <button
                 className=" Buttons Loginbutton--close"
