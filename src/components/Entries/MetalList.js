@@ -1,5 +1,5 @@
 // Imports
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { MetalApiTestContext } from "../MetalAPI/MetalApiTestProvider";
 import { CollectionContext } from "../Collections/collectionProvider";
 import { MetalContext } from "./MetalProvider";
@@ -20,6 +20,8 @@ export const MetalList = () => {
   const { metalTypes, getMetalTypes } = useContext(MetalTypesContext);
   const { pieceTypes, getPieceTypes } = useContext(PieceTypesContext);
   const { metalTestValue } = useContext(MetalApiTestContext);
+
+  const [filteredMetals, setFilteredMetals] = useState([])
 
   // Setting blanks refs to use in add form
   const pieceName = useRef();
@@ -43,6 +45,14 @@ export const MetalList = () => {
     getMetalTypes();
     getPieceTypes();
   }, []);
+
+  useEffect(() => {
+    console.log(chosenCollectionName.current.value)
+    const collectionFilteredMetals = userMetals.filter((m) => {
+      return m.collectionId === parseInt(chosenCollectionName.current.value)
+    })
+    setFilteredMetals(collectionFilteredMetals)
+  }, [chosenCollectionName])
 
   // Function to just retrieve metals specific to the logged in user
   const userMetals = metals.filter((m) => {
@@ -103,6 +113,7 @@ export const MetalList = () => {
     const userSelectedCollection = userMetals.filter((m) => {
       return m.collectionId === parseInt(chosenCollectionName.current.value)
     }) 
+    setFilteredMetals(userSelectedCollection)
     console.log(chosenCollectionName.current.value);
     console.log(userSelectedCollection)
     
@@ -221,16 +232,20 @@ export const MetalList = () => {
         {/* Metal List START */}
 
 
+        {filteredMetals === []?
         <div className="metals">
-          
             {userMetals.map((m) => {
               return (
                 <Metal key={m.id} metal={m} metalValue={metalTestValue[0]} />
               );
             })}
-            
-            
-        </div>
+        </div>:<div className="metals">
+            {filteredMetals.map((m) => {
+              return (
+                <Metal key={m.id} metal={m} metalValue={metalTestValue[0]} />
+              );
+            })}
+        </div>}
       </div>
 
       {/* Metal List END */}
