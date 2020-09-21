@@ -14,7 +14,6 @@ export const MetalApiTestProvider = (props) => {
   useEffect(() => {
     getTestValue()
   }, [])
-  console.log(metalTestValue)
   
   return (
     <MetalApiTestContext.Provider
