@@ -31,7 +31,7 @@ export const MetalList = () => {
   const piecePurchasedPrice = useRef();
   const chooseCollection = useRef();
   const addPieceDialog = useRef();
-
+  
   // useEffect to get all necessary data from providers
   useEffect(() => {
     getMetals();
@@ -40,53 +40,43 @@ export const MetalList = () => {
     getMetalTypes();
     getPieceTypes();
   }, []);
-
-  console.log(metals);
-  console.log(metalTestValue[0]);
-  console.log(unitOptions);
-  console.log(collectionOptions);
-  console.log(metalTypes);
-  console.log(pieceTypes);
-
+  
+  
+  
   // Function to just retrieve metals specific to the logged in user
   const userMetals = metals.filter((m) => {
     return m.userId === parseInt(localStorage.vault_user);
   });
-  console.log(userMetals);
-
+  
+  
+  // Function to just retrieve collections specific to the logged in user
   const userCollections = collectionOptions.filter((c) => {
     return c.userId === parseInt(localStorage.vault_user);
   });
-  console.log(userCollections);
-
+  
+  
+  // Function to retrieve total collection weight
   const CollectionWeight = userMetals.map((metal) => {
     return metal.weight;
   });
-  console.log(CollectionWeight);
-
+  
+  
   let collectionWeightTotal = 0;
   for (const piece of CollectionWeight) {
     collectionWeightTotal = collectionWeightTotal + piece;
   }
-  console.log(collectionWeightTotal);
-
-  console.log(metalTestValue[0].rates.XAG);
-  console.log(parseInt(localStorage.vault_user));
-
-  // Add a piece section
+  
+  
+// Add a piece modal Trigger START
   const addPieceButtonClicked = (e) => {
     e.preventDefault();
-
+    
     addPieceDialog.current.showModal();
   };
+  
+// Add a piece modal Trigger END
 
-  const newCollectionButtonClicked = (e) => {
-    e.preventDefault()
-
-    
-  }
-
-  // add a piece end
+// add a piece function START
 
   const addItem = () => {
 
@@ -125,10 +115,15 @@ export const MetalList = () => {
 
   };
 
+// add a piece function END
+
+// HTML to render starts below
+
   return (
     <>
 
-      {/* Main enclosing container Start */}
+{/* Collection Value Container START */}
+
       <div className="collectionContainer">
         <div className="collectionValue">
           <div className="collectionHeader">Collection Value</div>
@@ -145,6 +140,11 @@ export const MetalList = () => {
             )}
           </div>
         </div>
+
+{/* Collection Value Container END */}
+
+{/* Trio Container START */}
+
         <div className="trioContainer">
           <div className="newCollectionContainer">
             <div>New Collection</div>
@@ -163,6 +163,11 @@ export const MetalList = () => {
             </button>
           </div>
         </div>
+
+{/* Trio Container END */}
+
+{/* Metal List START */}
+
         <div className="metals">
           {userMetals.map((m) => {
             return (
@@ -172,7 +177,10 @@ export const MetalList = () => {
         </div>
       </div>
 
-      {/* dialog for adding piece to collection */}
+{/* Metal List END */}
+          
+
+{/* dialog for adding piece to collection START */}
       <dialog className="dialog dialog--addPiece" ref={addPieceDialog}>
         <form className="form--add" onSubmit={addItem}>
           <div className="addHeader formText h3 mb-3 font-weight-normal">
@@ -324,6 +332,7 @@ export const MetalList = () => {
         </form>
       </dialog>
 
+{/* dialog for adding piece to collection END */}
       
     </>
   );
