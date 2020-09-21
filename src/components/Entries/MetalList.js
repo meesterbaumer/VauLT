@@ -21,7 +21,7 @@ export const MetalList = () => {
   const { pieceTypes, getPieceTypes } = useContext(PieceTypesContext);
   const { metalTestValue } = useContext(MetalApiTestContext);
 
-  const [filteredMetals, setFilteredMetals] = useState([])
+  const [filteredMetals, setFilteredMetals] = useState([]);
 
   // Setting blanks refs to use in add form
   const pieceName = useRef();
@@ -35,7 +35,7 @@ export const MetalList = () => {
   const addPieceDialog = useRef();
   const newCollectionDialog = useRef();
   const collectionName = useRef();
-  const chosenCollectionName = useRef();
+  const chosenCollection = useRef();
 
   // useEffect to get all necessary data from providers
   useEffect(() => {
@@ -47,24 +47,23 @@ export const MetalList = () => {
   }, []);
 
   useEffect(() => {
-    console.log(chosenCollectionName.current.value)
+    console.log(chosenCollection.current.value);
     const collectionFilteredMetals = userMetals.filter((m) => {
-      return m.collectionId === parseInt(chosenCollectionName.current.value)
-    })
-    setFilteredMetals(collectionFilteredMetals)
-  }, [chosenCollectionName])
+      return m.collectionId === parseInt(chosenCollection.current.value);
+    });
+    setFilteredMetals(collectionFilteredMetals);
+  }, [chosenCollection]);
 
   // Function to just retrieve metals specific to the logged in user
   const userMetals = metals.filter((m) => {
     return m.userId === parseInt(localStorage.vault_user);
   });
+  console.log(userMetals)
 
   // Function to just retrieve collections specific to the logged in user
   const userCollections = collectionOptions.filter((c) => {
     return c.userId === parseInt(localStorage.vault_user);
   });
-
-  
 
   // Function to retrieve total collection weight
   const CollectionWeight = userMetals.map((metal) => {
@@ -111,13 +110,12 @@ export const MetalList = () => {
 
   const changeCollection = () => {
     const userSelectedCollection = userMetals.filter((m) => {
-      return m.collectionId === parseInt(chosenCollectionName.current.value)
-    }) 
-    setFilteredMetals(userSelectedCollection)
-    console.log(chosenCollectionName.current.value);
-    console.log(userSelectedCollection)
-    
-  }
+      return m.collectionId === parseInt(chosenCollection.current.value);
+    });
+    setFilteredMetals(userSelectedCollection);
+    console.log(chosenCollection.current.value);
+    console.log(userSelectedCollection);
+  };
 
   // add collection function END
 
@@ -202,7 +200,7 @@ export const MetalList = () => {
             <div>View Collection</div>
 
             <select
-              ref={chosenCollectionName}
+              ref={chosenCollection}
               onChange={changeCollection}
               id="changeCollectionContainer"
               type="select"
@@ -216,7 +214,6 @@ export const MetalList = () => {
                   {uc.name}
                 </option>
               ))}
-
             </select>
           </div>
           <div className="addPieceContainer">
@@ -231,21 +228,24 @@ export const MetalList = () => {
 
         {/* Metal List START */}
 
-
-        {filteredMetals === []?
-        <div className="metals">
-            {userMetals.map((m) => {
+        {/* ternary for displaying metals */}
+        { filteredMetals === [] ? (
+          <div className="metals">
+            {userMetals.map((um) => {
               return (
-                <Metal key={m.id} metal={m} metalValue={metalTestValue[0]} />
+                <Metal key={um.id} metal={um} metalValue={metalTestValue[0]} />
               );
             })}
-        </div>:<div className="metals">
-            {filteredMetals.map((m) => {
+          </div>
+        ) : (
+          <div className="metals">
+            {filteredMetals.map((fm) => {
               return (
-                <Metal key={m.id} metal={m} metalValue={metalTestValue[0]} />
+                <Metal key={fm.id} metal={fm} metalValue={metalTestValue[0]} />
               );
             })}
-        </div>}
+          </div>
+        )}
       </div>
 
       {/* Metal List END */}
