@@ -25,7 +25,6 @@ export const ApplicationViews = (props) => {
               <MetalProvider>
                 <PieceTypesProvider>
                   <Route exact path="/collection">
-                    
                     <MetalList />
                   </Route>
                 </PieceTypesProvider>
