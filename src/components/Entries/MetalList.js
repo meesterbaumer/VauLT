@@ -54,6 +54,7 @@ export const MetalList = () => {
     return c.userId === parseInt(localStorage.vault_user);
   });
 
+  
 
   // Function to retrieve total collection weight
   const CollectionWeight = userMetals.map((metal) => {
@@ -99,10 +100,12 @@ export const MetalList = () => {
   };
 
   const changeCollection = () => {
-    console.log("works");
-    return <>
-    <div>Hello</div>
-    </>
+    const userSelectedCollection = userMetals.filter((m) => {
+      return m.collectionId === parseInt(chosenCollectionName.current.value)
+    }) 
+    console.log(chosenCollectionName.current.value);
+    console.log(userSelectedCollection)
+    
   }
 
   // add collection function END
