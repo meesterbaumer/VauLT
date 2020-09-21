@@ -11,11 +11,22 @@ export const CollectionProvider = (props) => {
       .then(setCollections);
   };
 
+  const addCollections = (collection) => {
+    return fetch("http://localhost:8088/collections", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(collection),
+    }).then(getCollections);
+  };
+
   return (
     <CollectionContext.Provider
       value={{
         collectionOptions,
         getCollections,
+        addCollections,
       }}
     >
       {props.children}

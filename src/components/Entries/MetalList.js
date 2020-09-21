@@ -1,4 +1,4 @@
-// Imports 
+// Imports
 import React, { useContext, useEffect, useRef } from "react";
 import { MetalApiTestContext } from "../MetalAPI/MetalApiTestProvider";
 import { CollectionContext } from "../Collections/collectionProvider";
@@ -8,16 +8,15 @@ import { MetalTypesContext } from "./MetalTypesProvider";
 import { Metal } from "./Metal";
 import "./Metal.css";
 import { PieceTypesContext } from "./PieceTypesProvider";
-import { NewCollectionButtonClicked } from "../Collections/CollectionForm";
 
 
 // Function to list all metals for the current User
 export const MetalList = () => {
   // Setting all data with useContext()
   const { metals, getMetals, addMetals } = useContext(MetalContext);
-  const { collectionOptions, getCollections } = useContext(CollectionContext);
+  const { collectionOptions, getCollections, addCollections } = useContext(CollectionContext);
   const { unitOptions, getUnits } = useContext(UnitContext);
-  const { metalTypes, getMetalTypes } = useContext(MetalTypesContext)
+  const { metalTypes, getMetalTypes } = useContext(MetalTypesContext);
   const { pieceTypes, getPieceTypes } = useContext(PieceTypesContext);
   const { metalTestValue } = useContext(MetalApiTestContext);
 
@@ -31,7 +30,9 @@ export const MetalList = () => {
   const piecePurchasedPrice = useRef();
   const chooseCollection = useRef();
   const addPieceDialog = useRef();
-  
+  const newCollectionDialog = useRef()
+  const collectionName = useRef()
+
   // useEffect to get all necessary data from providers
   useEffect(() => {
     getMetals();
@@ -40,89 +41,110 @@ export const MetalList = () => {
     getMetalTypes();
     getPieceTypes();
   }, []);
-  
-  
-  
+
   // Function to just retrieve metals specific to the logged in user
   const userMetals = metals.filter((m) => {
     return m.userId === parseInt(localStorage.vault_user);
   });
-  
-  
+
   // Function to just retrieve collections specific to the logged in user
   const userCollections = collectionOptions.filter((c) => {
     return c.userId === parseInt(localStorage.vault_user);
   });
-  
-  
+
   // Function to retrieve total collection weight
   const CollectionWeight = userMetals.map((metal) => {
     return metal.weight;
   });
-  
-  
+
   let collectionWeightTotal = 0;
   for (const piece of CollectionWeight) {
     collectionWeightTotal = collectionWeightTotal + piece;
   }
-  
-  
-// Add a piece modal Trigger START
+
+  // Add a piece modal Trigger START
   const addPieceButtonClicked = (e) => {
     e.preventDefault();
-    
+
     addPieceDialog.current.showModal();
   };
-  
-// Add a piece modal Trigger END
 
-// add a piece function START
+  const newCollectionClicked = (e) => {
+    e.preventDefault();
 
-  const addItem = () => {
-
-    const name = pieceName.current.value
-    const weight = parseInt(pieceWeight.current.value)
-    const qty = parseInt(pieceQty.current.value)
-    const purchasedPrice = parseInt(piecePurchasedPrice.current.value)
-    const timestamp = Date.now()
-    const isFavorite = false
-    const isHidden = false
-    const userId = parseInt(localStorage.vault_user)
-    const collectionId = parseInt(chooseCollection.current.value)
-    const metalTypeId = parseInt(metalType.current.value)
-    const pieceTypeId = parseInt(pieceType.current.value)
-    const unitId = parseInt(pieceUnit.current.value)
-    
-
-        if (unitId !== 0 || collectionId !== 0 || metalTypeId !== 0 || pieceTypeId !== 0) {
-      addMetals({
-            name: name,
-            weight: weight,
-            qty: qty,
-            purchasedPrice: purchasedPrice,
-            timestamp: timestamp,
-            isFavorite: isFavorite,
-            isHidden: isHidden,
-            userId: userId,
-            collectionId: collectionId,
-            metalTypeId: metalTypeId,
-            pieceTypeId: pieceTypeId,
-            unitId: unitId
-          })
-    } else {
-      window.alert("Be sure to complete all sections")
-    }
-
+    newCollectionDialog.current.showModal();
   };
 
-// add a piece function END
+  // Add a piece modal Trigger END
 
-// HTML to render starts below
+  // add collection function START
+
+  const addCollection = () => {
+    const name = collectionName.current.value;
+    const userId = parseInt(localStorage.vault_user);
+
+    console.log("Testing")
+
+    if (name !== 0) {
+      addCollections({
+        name: name,
+        userId: userId,
+      });
+    } else {
+      window.alert("Be sure to complete all sections");
+    }
+  };
+
+  // add collection function END
+
+  // add a piece function START
+
+  const addItem = () => {
+    const name = pieceName.current.value;
+    const weight = parseInt(pieceWeight.current.value);
+    const qty = parseInt(pieceQty.current.value);
+    const purchasedPrice = parseInt(piecePurchasedPrice.current.value);
+    const timestamp = Date.now();
+    const isFavorite = false;
+    const isHidden = false;
+    const userId = parseInt(localStorage.vault_user);
+    const collectionId = parseInt(chooseCollection.current.value);
+    const metalTypeId = parseInt(metalType.current.value);
+    const pieceTypeId = parseInt(pieceType.current.value);
+    const unitId = parseInt(pieceUnit.current.value);
+
+    if (
+      unitId !== 0 ||
+      collectionId !== 0 ||
+      metalTypeId !== 0 ||
+      pieceTypeId !== 0
+    ) {
+      addMetals({
+        name: name,
+        weight: weight,
+        qty: qty,
+        purchasedPrice: purchasedPrice,
+        timestamp: timestamp,
+        isFavorite: isFavorite,
+        isHidden: isHidden,
+        userId: userId,
+        collectionId: collectionId,
+        metalTypeId: metalTypeId,
+        pieceTypeId: pieceTypeId,
+        unitId: unitId,
+      });
+    } else {
+      window.alert("Be sure to complete all sections");
+    }
+  };
+
+  // add a piece function END
+
+  // HTML to render starts below
 
   return (
     <>
-
-{/* Collection Value Container START */}
+      {/* Collection Value Container START */}
 
       <div className="collectionContainer">
         <div className="collectionValue">
@@ -141,14 +163,16 @@ export const MetalList = () => {
           </div>
         </div>
 
-{/* Collection Value Container END */}
+        {/* Collection Value Container END */}
 
-{/* Trio Container START */}
+        {/* Trio Container START */}
 
         <div className="trioContainer">
           <div className="newCollectionContainer">
             <div>New Collection</div>
-            <button onClick={NewCollectionButtonClicked} id="newCollection">New Collection</button>
+            <button onClick={newCollectionClicked} id="newCollection">
+              New Collection
+            </button>
           </div>
           <div className="changeCollectionContainer">
             <div>View Collection</div>
@@ -164,9 +188,9 @@ export const MetalList = () => {
           </div>
         </div>
 
-{/* Trio Container END */}
+        {/* Trio Container END */}
 
-{/* Metal List START */}
+        {/* Metal List START */}
 
         <div className="metals">
           {userMetals.map((m) => {
@@ -177,10 +201,49 @@ export const MetalList = () => {
         </div>
       </div>
 
-{/* Metal List END */}
-          
+      {/* Metal List END */}
 
-{/* dialog for adding piece to collection START */}
+      {/* dialog for new collection START */}
+      <dialog
+        className="dialog dialog--newCollection"
+        ref={newCollectionDialog}
+      >
+        <form className="form--add" onSubmit={addCollection}>
+          <div className="addHeader formText h3 mb-3 font-weight-normal">
+            Type a name for your new collection
+          </div>
+          <fieldset>
+            <label className="formText" htmlFor="collectionName">
+              Collection Name
+            </label>
+            <input
+              ref={collectionName}
+              type="text"
+              name="collectionName"
+              className="form-control"
+              placeholder="Enter a name for your collection"
+              required
+              autoFocus
+            />
+          </fieldset>
+          <fieldset>
+            <div className="buttonsContainer">
+              <button className="Buttons" type="submit">
+                Add new colletion to VauLT
+              </button>
+              <button
+                className=" Buttons Loginbutton--close"
+                onClick={(e) => newCollectionDialog.current.close()}
+              >
+                Close
+              </button>
+            </div>
+          </fieldset>
+        </form>
+      </dialog>
+      {/* dialog for new collection END */}
+
+      {/* dialog for adding piece to collection START */}
       <dialog className="dialog dialog--addPiece" ref={addPieceDialog}>
         <form className="form--add" onSubmit={addItem}>
           <div className="addHeader formText h3 mb-3 font-weight-normal">
@@ -332,8 +395,7 @@ export const MetalList = () => {
         </form>
       </dialog>
 
-{/* dialog for adding piece to collection END */}
-      
+      {/* dialog for adding piece to collection END */}
     </>
   );
 };
