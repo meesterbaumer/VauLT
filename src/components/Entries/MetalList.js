@@ -1,5 +1,5 @@
 // Imports
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { MetalApiTestContext } from "../MetalAPI/MetalApiTestProvider";
 import { CollectionContext } from "../Collections/collectionProvider";
 import { MetalContext } from "./MetalProvider";
@@ -21,6 +21,8 @@ export const MetalList = () => {
   const { pieceTypes, getPieceTypes } = useContext(PieceTypesContext);
   const { metalTestValue } = useContext(MetalApiTestContext);
 
+  const [filteredMetals, setFilteredMetals] = useState([]);
+
   // Setting blanks refs to use in add form
   const pieceName = useRef();
   const metalType = useRef();
@@ -33,7 +35,7 @@ export const MetalList = () => {
   const addPieceDialog = useRef();
   const newCollectionDialog = useRef();
   const collectionName = useRef();
-  const chosenCollectionName = useRef();
+  const chosenCollection = useRef(0);
 
   // useEffect to get all necessary data from providers
   useEffect(() => {
@@ -44,16 +46,26 @@ export const MetalList = () => {
     getPieceTypes();
   }, []);
 
+  useEffect(() => {
+    console.log(chosenCollection.current.value);
+    console.log(filteredMetals);
+    const collectionFilteredMetals = userMetals.filter((m) => {
+      return m.collectionId === parseInt(chosenCollection.current.value);
+    });
+    setFilteredMetals(collectionFilteredMetals);
+  }, [chosenCollection]);
+
   // Function to just retrieve metals specific to the logged in user
   const userMetals = metals.filter((m) => {
     return m.userId === parseInt(localStorage.vault_user);
-  });
+  }).reverse();
+
+  console.log(userMetals);
 
   // Function to just retrieve collections specific to the logged in user
   const userCollections = collectionOptions.filter((c) => {
     return c.userId === parseInt(localStorage.vault_user);
   });
-
 
   // Function to retrieve total collection weight
   const CollectionWeight = userMetals.map((metal) => {
@@ -98,12 +110,17 @@ export const MetalList = () => {
     }
   };
 
+  console.log(chosenCollection.current.value);
   const changeCollection = () => {
-    console.log("works");
-    return <>
-    <div>Hello</div>
-    </>
-  }
+    const userSelectedCollection = userMetals.filter((m) => {
+      return m.collectionId === parseInt(chosenCollection.current.value);
+    });
+    setFilteredMetals(userSelectedCollection);
+    console.log(chosenCollection.current.value);
+    console.log(userSelectedCollection);
+    console.log(userMetals);
+    console.log(filteredMetals);
+  };
 
   // add collection function END
 
@@ -188,7 +205,7 @@ export const MetalList = () => {
             <div>View Collection</div>
 
             <select
-              ref={chosenCollectionName}
+              ref={chosenCollection}
               onChange={changeCollection}
               id="changeCollectionContainer"
               type="select"
@@ -202,7 +219,6 @@ export const MetalList = () => {
                   {uc.name}
                 </option>
               ))}
-
             </select>
           </div>
           <div className="addPieceContainer">
@@ -217,17 +233,24 @@ export const MetalList = () => {
 
         {/* Metal List START */}
 
-
-        <div className="metals">
-          
-            {userMetals.map((m) => {
+        {/* ternary for displaying metals */}
+        {chosenCollection.current.value === "0" ? (
+          <div className="metals">
+            {userMetals.map((um) => {
               return (
-                <Metal key={m.id} metal={m} metalValue={metalTestValue[0]} />
+                <Metal key={um.id} metal={um} metalValue={metalTestValue[0]} />
               );
             })}
-            
-            
-        </div>
+          </div>
+        ) : (
+          <div className="metals">
+            {filteredMetals.map((fm) => {
+              return (
+                <Metal key={fm.id} metal={fm} metalValue={metalTestValue[0]} />
+              );
+            })}
+          </div>
+        )}
       </div>
 
       {/* Metal List END */}
@@ -258,7 +281,7 @@ export const MetalList = () => {
           <fieldset>
             <div className="buttonsContainer">
               <button className="Buttons" type="submit">
-                Add new colletion to VauLT
+                Add new collection to VauLT
               </button>
               <button
                 className=" Buttons Loginbutton--close"
