@@ -36,7 +36,7 @@ export const MetalList = () => {
   const newCollectionDialog = useRef();
   const collectionName = useRef();
   const chosenCollection = useRef(0);
-  
+
   // useEffect to get all necessary data from providers
   useEffect(() => {
     getMetals();
@@ -45,60 +45,61 @@ export const MetalList = () => {
     getMetalTypes();
     getPieceTypes();
   }, []);
-  
+
   useEffect(() => {
     console.log(chosenCollection.current.value);
-    console.log(filteredMetals)
+    console.log(filteredMetals);
     const collectionFilteredMetals = userMetals.filter((m) => {
       return m.collectionId === parseInt(chosenCollection.current.value);
     });
     setFilteredMetals(collectionFilteredMetals);
   }, [chosenCollection]);
-  
+
   // Function to just retrieve metals specific to the logged in user
   const userMetals = metals.filter((m) => {
     return m.userId === parseInt(localStorage.vault_user);
-  });
-  console.log(userMetals)
-  
+  }).reverse();
+
+  console.log(userMetals);
+
   // Function to just retrieve collections specific to the logged in user
   const userCollections = collectionOptions.filter((c) => {
     return c.userId === parseInt(localStorage.vault_user);
   });
-  
+
   // Function to retrieve total collection weight
   const CollectionWeight = userMetals.map((metal) => {
     return metal.weight;
   });
-  
+
   let collectionWeightTotal = 0;
   for (const piece of CollectionWeight) {
     collectionWeightTotal = collectionWeightTotal + piece;
   }
-  
+
   // Add a piece modal Trigger START
   const addPieceButtonClicked = (e) => {
     e.preventDefault();
-    
+
     addPieceDialog.current.showModal();
   };
-  
+
   const newCollectionClicked = (e) => {
     e.preventDefault();
-    
+
     newCollectionDialog.current.showModal();
   };
-  
+
   // Add a piece modal Trigger END
-  
+
   // add collection function START
-  
+
   const addCollection = () => {
     const name = collectionName.current.value;
     const userId = parseInt(localStorage.vault_user);
-    
+
     console.log("Testing");
-    
+
     if (name !== 0) {
       addCollections({
         name: name,
@@ -108,8 +109,8 @@ export const MetalList = () => {
       window.alert("Be sure to complete all sections");
     }
   };
-  
-  console.log(chosenCollection.current.value)
+
+  console.log(chosenCollection.current.value);
   const changeCollection = () => {
     const userSelectedCollection = userMetals.filter((m) => {
       return m.collectionId === parseInt(chosenCollection.current.value);
@@ -117,8 +118,8 @@ export const MetalList = () => {
     setFilteredMetals(userSelectedCollection);
     console.log(chosenCollection.current.value);
     console.log(userSelectedCollection);
-    console.log(userMetals)
-    console.log(filteredMetals)
+    console.log(userMetals);
+    console.log(filteredMetals);
   };
 
   // add collection function END
@@ -233,7 +234,7 @@ export const MetalList = () => {
         {/* Metal List START */}
 
         {/* ternary for displaying metals */}
-        { chosenCollection.current.value === "0" ? (
+        {chosenCollection.current.value === "0" ? (
           <div className="metals">
             {userMetals.map((um) => {
               return (
