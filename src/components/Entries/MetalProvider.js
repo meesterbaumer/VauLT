@@ -23,6 +23,17 @@ export const MetalProvider = (props) => {
     }).then(getMetals);
   };
 
+  const editMetals = (metal) => {
+    return fetch(`http://localhost:8088/metals/${metalId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(metal)
+    })
+    .then(getMetals)
+  }
+
   const deleteMetals = (metalId) => {
     return fetch(`http://localhost:8088/metals/${metalId}`, {
       method: "DELETE",
@@ -35,6 +46,7 @@ export const MetalProvider = (props) => {
         metals,
         getMetals,
         addMetals,
+        editMetals,
         deleteMetals,
       }}
     >
