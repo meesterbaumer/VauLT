@@ -24,7 +24,7 @@ export const MetalProvider = (props) => {
   };
 
   const editMetals = (metal) => {
-    return fetch(`http://localhost:8088/metals/${metalId}`, {
+    return fetch(`http://localhost:8088/metals/${metal}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"

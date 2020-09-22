@@ -5,7 +5,7 @@ import { MetalContext } from "./MetalProvider";
 import "./Metal.css";
 
 export const Metal = ({ metal, metalValue }) => {
-  const { deleteMetals } = useContext(MetalContext);
+  const { deleteMetals, editMetals } = useContext(MetalContext);
   const { deleteConfirmDialog } = useRef();
 
 
@@ -22,6 +22,14 @@ export const Metal = ({ metal, metalValue }) => {
         <div className="metal__currentValue">
           Current Value: $ {parseFloat(correctRate * metal.weight).toFixed(2)}
         </div>
+        <button
+          onClick={() => {
+            editMetals(metal.id)
+          }}
+          className="metal--edit"
+        >
+          Edit
+        </button>
         <button
           onClick={() => {
             deleteMetals(metal.id)
