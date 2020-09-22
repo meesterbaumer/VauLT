@@ -10,7 +10,7 @@ import "./Metal.css";
 import { PieceTypesContext } from "./PieceTypesProvider";
 
 // Function to list all metals for the current User
-export const MetalList = () => {
+export const MetalList = (props) => {
   // Setting all data with useContext()
   const { metals, getMetals, addMetals } = useContext(MetalContext);
   const { collectionOptions, getCollections, addCollections } = useContext(
@@ -22,6 +22,9 @@ export const MetalList = () => {
   const { metalTestValue } = useContext(MetalApiTestContext);
 
   const [filteredMetals, setFilteredMetals] = useState([]);
+  const [metal, setMetal] = useState({})
+
+  // const editMode = 
 
   // Setting blanks refs to use in add form
   const pieceName = useRef();
@@ -84,6 +87,11 @@ export const MetalList = () => {
     addPieceDialog.current.showModal();
   };
 
+  // const editPieceButtonClicked = (e) => {
+  //   e.preventDefault()
+  //   addPieceDialog.current.showModal()
+  // }
+
   const newCollectionClicked = (e) => {
     e.preventDefault();
 
@@ -141,11 +149,14 @@ export const MetalList = () => {
     const unitId = parseInt(pieceUnit.current.value);
 
     if (
-      unitId !== 0 ||
-      collectionId !== 0 ||
-      metalTypeId !== 0 ||
-      pieceTypeId !== 0
+      unitId === 0 ||
+      collectionId === 0 ||
+      metalTypeId === 0 ||
+      pieceTypeId === 0
     ) {
+      window.alert("Be sure to complete all sections");
+      
+    } else {
       addMetals({
         name: name,
         weight: weight,
@@ -160,8 +171,6 @@ export const MetalList = () => {
         pieceTypeId: pieceTypeId,
         unitId: unitId,
       });
-    } else {
-      window.alert("Be sure to complete all sections");
     }
   };
 
@@ -238,7 +247,7 @@ export const MetalList = () => {
           <div className="metals">
             {userMetals.map((um) => {
               return (
-                <Metal key={um.id} metal={um} metalValue={metalTestValue[0]} />
+                <Metal key={um.id} metal={um} props={props.history} metalValue={metalTestValue[0]} />
               );
             })}
           </div>
@@ -246,7 +255,7 @@ export const MetalList = () => {
           <div className="metals">
             {filteredMetals.map((fm) => {
               return (
-                <Metal key={fm.id} metal={fm} metalValue={metalTestValue[0]} />
+                <Metal key={fm.id} metal={fm} props={props.history} metalValue={metalTestValue[0]} />
               );
             })}
           </div>

@@ -2,12 +2,14 @@
 
 import React, { useContext, useRef } from "react";
 import { MetalContext } from "./MetalProvider";
+import { MetalList, editPieceButtonClicked } from "./MetalList";
 import "./Metal.css";
 
-export const Metal = ({ metal, metalValue }) => {
-  const { deleteMetals, editMetals } = useContext(MetalContext);
-  const { deleteConfirmDialog } = useRef();
 
+
+export const Metal = ({ metal, metalValue, props }) => {
+  const { deleteMetals } = useContext(MetalContext);
+  // const { deleteConfirmDialog } = useRef();
 
   const rates = metalValue.rates;
   const correctRate = 1 / rates.XAG;
@@ -23,16 +25,16 @@ export const Metal = ({ metal, metalValue }) => {
           Current Value: $ {parseFloat(correctRate * metal.weight).toFixed(2)}
         </div>
         <button
-          onClick={() => {
-            editMetals(metal.id)
-          }}
           className="metal--edit"
+          onClick={() => {
+            props.push(`/collection/edit/${metal.id}`)
+          }}
         >
           Edit
         </button>
         <button
           onClick={() => {
-            deleteMetals(metal.id)
+            deleteMetals(metal.id);
           }}
           className="metal--delete"
         >
