@@ -43,7 +43,7 @@ export const MetalList = (props) => {
   // Setting blanks refs to use in add form
   const pieceName = useRef();
   const metalType = useRef();
-  const pieceType = useRef();
+  // const pieceType = useRef();
   const pieceWeight = useRef();
   const pieceUnit = useRef();
   const pieceQty = useRef();
@@ -167,14 +167,14 @@ export const MetalList = (props) => {
     const userId = parseInt(localStorage.vault_user);
     const collectionId = parseInt(chooseCollection.current.value);
     const metalTypeId = parseInt(metalType.current.value);
-    const pieceTypeId = parseInt(pieceType.current.value);
+    // const pieceTypeId = parseInt(pieceType.current.value);
     const unitId = parseInt(pieceUnit.current.value);
 
     if (
       unitId === 0 ||
       collectionId === 0 ||
-      metalTypeId === 0 ||
-      pieceTypeId === 0
+      metalTypeId === 0 
+      // pieceTypeId === 0
     ) {
       window.alert("Be sure to complete all sections");
     } else {
@@ -191,7 +191,7 @@ export const MetalList = (props) => {
           userId: userId,
           collectionId: collectionId,
           metalTypeId: metalTypeId,
-          pieceTypeId: pieceTypeId,
+          pieceTypeId: metal.pieceTypeId,
           unitId: unitId,
         }).then(() => props.history.push("/collection"));
       } else {
@@ -206,7 +206,7 @@ export const MetalList = (props) => {
           userId: userId,
           collectionId: collectionId,
           metalTypeId: metalTypeId,
-          pieceTypeId: pieceTypeId,
+          pieceTypeId: metal.pieceTypeId,
           unitId: unitId,
         }).then(() => props.history.push("/collection"));
       }
@@ -382,9 +382,9 @@ export const MetalList = (props) => {
               Category
             </label>
             <select
-              ref={pieceType}
+              // ref={pieceType}
               name="pieceTypeId"
-              defaultValue={metal.pieceTypeId}
+              value={metal.pieceTypeId}
               onChange={handleControlledInputChange}
               type="select"
               className="form-control"
@@ -406,7 +406,7 @@ export const MetalList = (props) => {
               ref={metalType}
               type="select"
               name="metalTypeId"
-              defaultValue={metal.metalTypeId}
+              value={metal.metalTypeId}
               onChange={handleControlledInputChange}
               className="form-control"
               required
@@ -442,7 +442,7 @@ export const MetalList = (props) => {
               ref={pieceUnit}
               type="select"
               name="unitId"
-              defaultValue={metal.unitId}
+              value={metal.unitId}
               onChange={handleControlledInputChange}
               className="form-control"
               required
@@ -493,7 +493,7 @@ export const MetalList = (props) => {
               ref={chooseCollection}
               type="select"
               name="collectionId"
-              defaultValue={metal.collectionId}
+              value={metal.collectionId}
               onChange={handleControlledInputChange}
               className="form-control"
               required
@@ -521,7 +521,10 @@ export const MetalList = (props) => {
               </button>
               <button
                 className=" Buttons Loginbutton--close"
-                onClick={(e) => addPieceDialog.current.close()}
+                onClick={(e) => {
+                  addPieceDialog.current.close()
+                  props.history.push("/collection")
+                }}
               >
                 Close
               </button>
