@@ -10,9 +10,9 @@ import "./Metal.css";
 import { PieceTypesContext } from "./PieceTypesProvider";
 
 // Function to list all metals for the current User
-export const MetalList = () => {
+export const MetalList = (props) => {
   // Setting all data with useContext()
-  const { metals, getMetals, addMetals } = useContext(MetalContext);
+  const { metals, getMetals, addMetals, editMetals } = useContext(MetalContext);
   const { collectionOptions, getCollections, addCollections } = useContext(
     CollectionContext
   );
@@ -22,11 +22,28 @@ export const MetalList = () => {
   const { metalTestValue } = useContext(MetalApiTestContext);
 
   const [filteredMetals, setFilteredMetals] = useState([]);
+  const [metal, setMetal] = useState({});
+
+  const editMode = props.match.params.hasOwnProperty("metalId");
+
+  const handleControlledInputChange = (event) => {
+    const newMetal = Object.assign({}, metal);
+    newMetal[event.target.name] = event.target.value;
+    setMetal(newMetal);
+  };
+
+  const getMetalInEditMode = () => {
+    if (editMode) {
+      const metalId = parseInt(props.match.params.metalId);
+      const selectedMetal = metals.find((a) => a.id === metalId) || {};
+      setMetal(selectedMetal);
+    }
+  };
 
   // Setting blanks refs to use in add form
   const pieceName = useRef();
   const metalType = useRef();
-  const pieceType = useRef();
+  // const pieceType = useRef();
   const pieceWeight = useRef();
   const pieceUnit = useRef();
   const pieceQty = useRef();
@@ -47,6 +64,10 @@ export const MetalList = () => {
   }, []);
 
   useEffect(() => {
+    getMetalInEditMode();
+  }, [metals]);
+
+  useEffect(() => {
     console.log(chosenCollection.current.value);
     console.log(filteredMetals);
     const collectionFilteredMetals = userMetals.filter((m) => {
@@ -55,10 +76,21 @@ export const MetalList = () => {
     setFilteredMetals(collectionFilteredMetals);
   }, [chosenCollection]);
 
+  useEffect(() => {
+    if (editMode) {
+      console.log("EditMode");
+      addPieceButtonClicked();
+    } else {
+      console.log("not Edit Mode");
+    }
+  }, []);
+
   // Function to just retrieve metals specific to the logged in user
-  const userMetals = metals.filter((m) => {
-    return m.userId === parseInt(localStorage.vault_user);
-  }).reverse();
+  const userMetals = metals
+    .filter((m) => {
+      return m.userId === parseInt(localStorage.vault_user);
+    })
+    .reverse();
 
   console.log(userMetals);
 
@@ -78,9 +110,7 @@ export const MetalList = () => {
   }
 
   // Add a piece modal Trigger START
-  const addPieceButtonClicked = (e) => {
-    e.preventDefault();
-
+  const addPieceButtonClicked = () => {
     addPieceDialog.current.showModal();
   };
 
@@ -137,31 +167,49 @@ export const MetalList = () => {
     const userId = parseInt(localStorage.vault_user);
     const collectionId = parseInt(chooseCollection.current.value);
     const metalTypeId = parseInt(metalType.current.value);
-    const pieceTypeId = parseInt(pieceType.current.value);
+    // const pieceTypeId = parseInt(pieceType.current.value);
     const unitId = parseInt(pieceUnit.current.value);
 
     if (
-      unitId !== 0 ||
-      collectionId !== 0 ||
-      metalTypeId !== 0 ||
-      pieceTypeId !== 0
+      unitId === 0 ||
+      collectionId === 0 ||
+      metalTypeId === 0 
+      // pieceTypeId === 0
     ) {
-      addMetals({
-        name: name,
-        weight: weight,
-        qty: qty,
-        purchasedPrice: purchasedPrice,
-        timestamp: timestamp,
-        isFavorite: isFavorite,
-        isHidden: isHidden,
-        userId: userId,
-        collectionId: collectionId,
-        metalTypeId: metalTypeId,
-        pieceTypeId: pieceTypeId,
-        unitId: unitId,
-      });
-    } else {
       window.alert("Be sure to complete all sections");
+    } else {
+      if (editMode) {
+        editMetals({
+          id: metal.id,
+          name: name,
+          weight: weight,
+          qty: qty,
+          purchasedPrice: purchasedPrice,
+          timestamp: timestamp,
+          isFavorite: isFavorite,
+          isHidden: isHidden,
+          userId: userId,
+          collectionId: collectionId,
+          metalTypeId: metalTypeId,
+          pieceTypeId: metal.pieceTypeId,
+          unitId: unitId,
+        }).then(() => props.history.push("/collection"));
+      } else {
+        addMetals({
+          name: name,
+          weight: weight,
+          qty: qty,
+          purchasedPrice: purchasedPrice,
+          timestamp: timestamp,
+          isFavorite: isFavorite,
+          isHidden: isHidden,
+          userId: userId,
+          collectionId: collectionId,
+          metalTypeId: metalTypeId,
+          pieceTypeId: metal.pieceTypeId,
+          unitId: unitId,
+        }).then(() => props.history.push("/collection"));
+      }
     }
   };
 
@@ -213,7 +261,7 @@ export const MetalList = () => {
               className="form-control"
               required
             >
-              <option value="0">Choose</option>
+              <option value="0">All Metals</option>
               {userCollections.map((uc) => (
                 <option key={uc.id} value={uc.id}>
                   {uc.name}
@@ -238,7 +286,12 @@ export const MetalList = () => {
           <div className="metals">
             {userMetals.map((um) => {
               return (
-                <Metal key={um.id} metal={um} metalValue={metalTestValue[0]} />
+                <Metal
+                  key={um.id}
+                  metal={um}
+                  props={props.history}
+                  metalValue={metalTestValue[0]}
+                />
               );
             })}
           </div>
@@ -246,7 +299,12 @@ export const MetalList = () => {
           <div className="metals">
             {filteredMetals.map((fm) => {
               return (
-                <Metal key={fm.id} metal={fm} metalValue={metalTestValue[0]} />
+                <Metal
+                  key={fm.id}
+                  metal={fm}
+                  props={props.history}
+                  metalValue={metalTestValue[0]}
+                />
               );
             })}
           </div>
@@ -274,6 +332,7 @@ export const MetalList = () => {
               name="collectionName"
               className="form-control"
               placeholder="Enter a name for your collection"
+              onChange={handleControlledInputChange}
               required
               autoFocus
             />
@@ -297,33 +356,37 @@ export const MetalList = () => {
 
       {/* dialog for adding piece to collection START */}
       <dialog className="dialog dialog--addPiece" ref={addPieceDialog}>
-        <form className="form--add" onSubmit={addItem}>
+        <form className="form--add">
           <div className="addHeader formText h3 mb-3 font-weight-normal">
             Add a piece to your collection
           </div>
           <fieldset>
-            <label className="formText" htmlFor="pieceName">
+            <label className="formText" htmlFor="name">
               {" "}
               Piece Name{" "}
             </label>
             <input
               ref={pieceName}
               type="text"
-              name="pieceName"
+              name="name"
+              defaultValue={metal.name}
               className="form-control"
               placeholder="Enter a name for your piece"
+              onChange={handleControlledInputChange}
               required
               autoFocus
             />
           </fieldset>
           <fieldset>
-            <label className="formText" htmlFor="pieceTypes">
+            <label className="formText" htmlFor="pieceTypeId">
               Category
             </label>
             <select
-              ref={pieceType}
+              // ref={pieceType}
+              name="pieceTypeId"
+              value={metal.pieceTypeId}
+              onChange={handleControlledInputChange}
               type="select"
-              name="pieceTypes"
               className="form-control"
               required
             >
@@ -336,13 +399,15 @@ export const MetalList = () => {
             </select>
           </fieldset>
           <fieldset>
-            <label className="formText" htmlFor="metalTypes">
+            <label className="formText" htmlFor="metalTypeId">
               Type of Metal
             </label>
             <select
               ref={metalType}
               type="select"
-              name="metalTypes"
+              name="metalTypeId"
+              value={metal.metalTypeId}
+              onChange={handleControlledInputChange}
               className="form-control"
               required
             >
@@ -363,18 +428,22 @@ export const MetalList = () => {
               ref={pieceWeight}
               type="number"
               name="weight"
+              defaultValue={metal.weight}
+              onChange={handleControlledInputChange}
               className="form-control"
               required
             />
           </fieldset>
           <fieldset>
-            <label className="formText" htmlFor="weightUnit">
+            <label className="formText" htmlFor="unitId">
               Units
             </label>
             <select
               ref={pieceUnit}
               type="select"
-              name="weightUnit"
+              name="unitId"
+              value={metal.unitId}
+              onChange={handleControlledInputChange}
               className="form-control"
               required
             >
@@ -394,6 +463,8 @@ export const MetalList = () => {
               ref={pieceQty}
               type="number"
               name="qty"
+              defaultValue={metal.qty}
+              onChange={handleControlledInputChange}
               className="form-control"
               required
             />
@@ -405,7 +476,9 @@ export const MetalList = () => {
             <input
               ref={piecePurchasedPrice}
               type="number"
-              name="purchasePrice"
+              name="purchasedPrice"
+              defaultValue={metal.purchasedPrice}
+              onChange={handleControlledInputChange}
               className="form-control"
               step=".01"
               placeholder="13.00"
@@ -413,13 +486,15 @@ export const MetalList = () => {
             />
           </fieldset>
           <fieldset>
-            <label className="formText" htmlFor="chooseCollection">
+            <label className="formText" htmlFor="collectionId">
               Pick a Collection
             </label>
             <select
               ref={chooseCollection}
               type="select"
-              name="chooseCollection"
+              name="collectionId"
+              value={metal.collectionId}
+              onChange={handleControlledInputChange}
               className="form-control"
               required
             >
@@ -433,12 +508,23 @@ export const MetalList = () => {
           </fieldset>
           <fieldset>
             <div className="buttonsContainer">
-              <button className="Buttons" type="submit">
+              <button
+                className="Buttons"
+                type="submit"
+                onClick={(evt) => {
+                  evt.preventDefault();
+                  addItem();
+                  addPieceDialog.current.close()
+                }}
+              >
                 Add to your VauLT
               </button>
               <button
                 className=" Buttons Loginbutton--close"
-                onClick={(e) => addPieceDialog.current.close()}
+                onClick={(e) => {
+                  addPieceDialog.current.close()
+                  props.history.push("/collection")
+                }}
               >
                 Close
               </button>

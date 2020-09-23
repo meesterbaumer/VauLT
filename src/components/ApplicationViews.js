@@ -8,9 +8,10 @@ import { UnitProvider } from "./Units/UnitProvider";
 import { CollectionProvider } from "./Collections/collectionProvider";
 import { MetalTypesProvider } from "./Entries/MetalTypesProvider";
 import { PieceTypesProvider } from "./Entries/PieceTypesProvider";
+import { RenderModal } from "./Entries/TestEditModal";
 
 // test
-export const ApplicationViews = (props) => {
+export const ApplicationViews = () => {
   return (
     <>
       {/* Render the location list when http://localhost:3000/ */}
@@ -24,9 +25,15 @@ export const ApplicationViews = (props) => {
             <UnitProvider>
               <MetalProvider>
                 <PieceTypesProvider>
-                  <Route exact path="/collection">
-                    <MetalList />
-                  </Route>
+                  <Route
+                    exact
+                    path="/collection"
+                    render={(props) => <MetalList {...props} />}
+                  />
+                  <Route
+                    path="/collection/edit/:metalId(\d+)"
+                    render={(props) => <MetalList {...props} />}
+                  />
                 </PieceTypesProvider>
               </MetalProvider>
             </UnitProvider>
