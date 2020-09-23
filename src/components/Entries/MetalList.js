@@ -11,6 +11,9 @@ import { PieceTypesContext } from "./PieceTypesProvider";
 
 // Function to list all metals for the current User
 export const MetalList = (props) => {
+
+
+
   // Setting all data with useContext()
   const { metals, getMetals, addMetals } = useContext(MetalContext);
   const { collectionOptions, getCollections, addCollections } = useContext(
@@ -24,7 +27,9 @@ export const MetalList = (props) => {
   const [filteredMetals, setFilteredMetals] = useState([]);
   const [metal, setMetal] = useState({})
 
-  // const editMode = 
+  const editMode = props.match.params.hasOwnProperty("metalId")
+
+  
 
   // Setting blanks refs to use in add form
   const pieceName = useRef();
@@ -58,6 +63,17 @@ export const MetalList = (props) => {
     setFilteredMetals(collectionFilteredMetals);
   }, [chosenCollection]);
 
+  useEffect(() => {
+    if (editMode) {
+      console.log("EditMode")
+      addPieceButtonClicked()
+  
+    } else {
+      console.log("not Edit Mode")
+    } 
+  }, []);
+
+
   // Function to just retrieve metals specific to the logged in user
   const userMetals = metals.filter((m) => {
     return m.userId === parseInt(localStorage.vault_user);
@@ -81,16 +97,15 @@ export const MetalList = (props) => {
   }
 
   // Add a piece modal Trigger START
-  const addPieceButtonClicked = (e) => {
-    e.preventDefault();
+  const addPieceButtonClicked = () => {
+    
 
     addPieceDialog.current.showModal();
   };
 
-  // const editPieceButtonClicked = (e) => {
-  //   e.preventDefault()
-  //   addPieceDialog.current.showModal()
-  // }
+  
+
+  
 
   const newCollectionClicked = (e) => {
     e.preventDefault();
@@ -177,6 +192,8 @@ export const MetalList = (props) => {
   // add a piece function END
 
   // HTML to render starts below
+
+  
 
   return (
     <>
