@@ -222,7 +222,7 @@ export const MetalList = (props) => {
               className="form-control"
               required
             >
-              <option value="0">Choose</option>
+              <option value="0">All Metals</option>
               {userCollections.map((uc) => (
                 <option key={uc.id} value={uc.id}>
                   {uc.name}

@@ -32,7 +32,7 @@ export const ApplicationViews = () => {
                   />
                   <Route
                     path="/collection/edit/:metalId(\d+)"
-                    render={(props) => <RenderModal {...props} />}
+                    render={(props) => <MetalList {...props} />}
                   />
                 </PieceTypesProvider>
               </MetalProvider>
