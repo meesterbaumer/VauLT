@@ -18,6 +18,7 @@ export const Metal = ({ metal, metalValue, props }) => {
     <>
       <div className="singleMetal">
         <div className="metal__name">{metal.name}</div>
+        <img className="metal__image" src={metal.image} style={{width: `100px`}} alt=""></img>
         <div className="metal__weight">
           Weight: {metal.weight} {metal.unit.name}
         </div>
