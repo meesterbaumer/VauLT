@@ -8,7 +8,6 @@ import { UnitProvider } from "./Units/UnitProvider";
 import { CollectionProvider } from "./Collections/collectionProvider";
 import { MetalTypesProvider } from "./Entries/MetalTypesProvider";
 import { PieceTypesProvider } from "./Entries/PieceTypesProvider";
-import { RenderModal } from "./Entries/TestEditModal";
 
 // test
 export const ApplicationViews = () => {

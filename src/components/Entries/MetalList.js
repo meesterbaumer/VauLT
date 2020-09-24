@@ -1,13 +1,13 @@
 // Imports
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { MetalApiTestContext } from "../MetalAPI/MetalApiTestProvider";
-import { CollectionContext } from "../Collections/collectionProvider";
 import { MetalContext } from "./MetalProvider";
-import { UnitContext } from "../Units/UnitProvider";
+import { CollectionContext } from "../Collections/collectionProvider";
 import { MetalTypesContext } from "./MetalTypesProvider";
+import { PieceTypesContext } from "./PieceTypesProvider";
+import { UnitContext } from "../Units/UnitProvider";
 import { Metal } from "./Metal";
 import "./Metal.css";
-import { PieceTypesContext } from "./PieceTypesProvider";
 
 // Function to list all metals for the current User
 export const MetalList = (props) => {
