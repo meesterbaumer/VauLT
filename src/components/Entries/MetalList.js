@@ -1,13 +1,13 @@
 // Imports
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { MetalApiTestContext } from "../MetalAPI/MetalApiTestProvider";
-import { CollectionContext } from "../Collections/collectionProvider";
+import { MetalApiTestContext } from "../MetalAPI/MetalApiProvider";
 import { MetalContext } from "./MetalProvider";
-import { UnitContext } from "../Units/UnitProvider";
+import { CollectionContext } from "../Collections/collectionProvider";
 import { MetalTypesContext } from "./MetalTypesProvider";
+import { PieceTypesContext } from "./PieceTypesProvider";
+import { UnitContext } from "../Units/UnitProvider";
 import { Metal } from "./Metal";
 import "./Metal.css";
-import { PieceTypesContext } from "./PieceTypesProvider";
 
 // Function to list all metals for the current User
 export const MetalList = (props) => {
@@ -227,12 +227,12 @@ export const MetalList = (props) => {
           <div className="collectionWorth">
             ${" "}
             {parseFloat(
-              (1 / metalTestValue[0].rates.XAG) * collectionWeightTotal
+              (1 / metalTestValue.rates.XAG) * collectionWeightTotal
             ).toFixed(2)}
           </div>
           <div className="collectionUpdate">
             Data current as of{" "}
-            {new Date(metalTestValue[0].timestamp * 1000).toLocaleString(
+            {new Date(metalTestValue.timestamp * 1000).toLocaleString(
               "en-US"
             )}
           </div>
@@ -290,7 +290,7 @@ export const MetalList = (props) => {
                   key={um.id}
                   metal={um}
                   props={props.history}
-                  metalValue={metalTestValue[0]}
+                  metalValue={metalTestValue}
                 />
               );
             })}
@@ -303,7 +303,7 @@ export const MetalList = (props) => {
                   key={fm.id}
                   metal={fm}
                   props={props.history}
-                  metalValue={metalTestValue[0]}
+                  metalValue={metalTestValue}
                 />
               );
             })}

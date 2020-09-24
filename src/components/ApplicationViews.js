@@ -3,12 +3,11 @@ import { Route } from "react-router-dom";
 import { MetalProvider } from "./Entries/MetalProvider";
 import { MetalList } from "./Entries/MetalList";
 import { Dashboard } from "./Dashboard/Dashboard";
-import { MetalApiTestProvider } from "./MetalAPI/MetalApiTestProvider";
+import { MetalApiProvider } from "./MetalAPI/MetalApiProvider";
 import { UnitProvider } from "./Units/UnitProvider";
 import { CollectionProvider } from "./Collections/collectionProvider";
 import { MetalTypesProvider } from "./Entries/MetalTypesProvider";
 import { PieceTypesProvider } from "./Entries/PieceTypesProvider";
-import { RenderModal } from "./Entries/TestEditModal";
 
 // test
 export const ApplicationViews = () => {
@@ -19,7 +18,7 @@ export const ApplicationViews = () => {
         <Dashboard />
       </Route>
 
-      <MetalApiTestProvider>
+      <MetalApiProvider>
         <MetalTypesProvider>
           <CollectionProvider>
             <UnitProvider>
@@ -39,7 +38,7 @@ export const ApplicationViews = () => {
             </UnitProvider>
           </CollectionProvider>
         </MetalTypesProvider>
-      </MetalApiTestProvider>
+      </MetalApiProvider>
 
       <Route
         path="/logout"
