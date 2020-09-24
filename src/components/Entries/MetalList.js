@@ -1,6 +1,6 @@
 // Imports
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { MetalApiTestContext } from "../MetalAPI/MetalApiProvider";
+import { MetalApiTestContext } from "../MetalAPI/MetalApiTestProvider";
 import { MetalContext } from "./MetalProvider";
 import { CollectionContext } from "../Collections/collectionProvider";
 import { MetalTypesContext } from "./MetalTypesProvider";
@@ -227,12 +227,12 @@ export const MetalList = (props) => {
           <div className="collectionWorth">
             ${" "}
             {parseFloat(
-              (1 / metalTestValue.rates.XAG) * collectionWeightTotal
+              (1 / metalTestValue[0].rates.XAG) * collectionWeightTotal
             ).toFixed(2)}
           </div>
           <div className="collectionUpdate">
             Data current as of{" "}
-            {new Date(metalTestValue.timestamp * 1000).toLocaleString(
+            {new Date(metalTestValue[0].timestamp * 1000).toLocaleString(
               "en-US"
             )}
           </div>
@@ -290,7 +290,7 @@ export const MetalList = (props) => {
                   key={um.id}
                   metal={um}
                   props={props.history}
-                  metalValue={metalTestValue}
+                  metalValue={metalTestValue[0]}
                 />
               );
             })}
@@ -303,7 +303,7 @@ export const MetalList = (props) => {
                   key={fm.id}
                   metal={fm}
                   props={props.history}
-                  metalValue={metalTestValue}
+                  metalValue={metalTestValue[0]}
                 />
               );
             })}
