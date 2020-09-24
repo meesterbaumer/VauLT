@@ -103,7 +103,7 @@ export const MetalList = (props) => {
 
   // Function to retrieve total collection weight
   const CollectionWeight = userMetals.map((metal) => {
-    return metal.weight;
+    return metal.weight*metal.qty;
   });
 
   let collectionWeightTotal = 0;
@@ -227,7 +227,7 @@ export const MetalList = (props) => {
 
       <div className="collectionContainer">
         <div className="collectionValue">
-          <div className="collectionHeader">Collection Value</div>
+          <div className="collectionHeader">VauLT Value</div>
           <div className="collectionWorth">
             ${" "}
             {parseFloat(

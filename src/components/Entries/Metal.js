@@ -18,13 +18,16 @@ export const Metal = ({ metal, metalValue, props }) => {
     <>
       <div className="singleMetal">
         <div className="metal__name">{metal.name}</div>
+        <div>
         <img className="metal__image" src={metal.image} style={{width: `100px`}} alt=""></img>
+        </div>
         <div className="metal__weight">
           Weight: {metal.weight} {metal.unit.name}
         </div>
-        <div className="metal__currentValue">
-          Current Value: $ {parseFloat(correctRate * metal.weight).toFixed(2)}
+        <div className="metal__qty">
+          qty: {metal.qty}
         </div>
+        <div className="editDeleteButtonContainer">
         <button
           className="metal--edit"
           onClick={() => {
@@ -41,6 +44,10 @@ export const Metal = ({ metal, metalValue, props }) => {
         >
           Delete
         </button>
+        </div>
+        <div className="metal__currentValue">
+          Current Value: $ {parseFloat(correctRate * metal.weight).toFixed(2)}
+        </div>
       </div>
     </>
   );
