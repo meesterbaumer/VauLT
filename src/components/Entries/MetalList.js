@@ -522,7 +522,8 @@ export const MetalList = (props) => {
               type="file"
               onChange={uploadImage}
             />
-            {loading ? (
+            <img src={metal.image} style={{ width: `200px` }} alt="edit"></img>
+            {/* {loading ? (
               <div>Loading...</div>
             ) : (
               <img src={imageURL} style={{ width: `200px` }} alt="loading" />
@@ -531,7 +532,7 @@ export const MetalList = (props) => {
               <img src={metal.image} style={{ width: `200px` }} alt="edit" />
             ) : (
               ``
-            )}
+            )} */}
           </fieldset>
 
           <fieldset>
