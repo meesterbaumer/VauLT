@@ -1,32 +1,32 @@
 import React, { useState, useEffect } from "react";
 import apiKey from "../../Settings";
 
-export const MetalApiContext = React.createContext();
+export const MetalApiTestContext = React.createContext();
 
 export const MetalApiProvider = (props) => {
-  const [metalValue, setValue] = useState({ rates: {} });
+  const [metalTestValue, setTestValue] = useState({"rates": {}});
 
-  const getValue = () => {
+  const getTestValue = () => {
     return fetch(
       `https://cors-anywhere.herokuapp.com/https://metals-api.com/api/latest/?access_key=${apiKey.metalKey}&base=USD&symbols=XAU%2CXAG%2CXPD%2CXPT%2CXRH`
     )
       .then((r) => r.json())
-      .then(setValue);
+      .then(setTestValue);
   };
 
   useEffect(() => {
     getTestValue();
   }, []);
-  console.log(metalTestValue);
+  // console.log(metalTestValue);
 
   return (
-    <MetalApiContext.Provider
+    <MetalApiTestContext.Provider
       value={{
-        metalValue,
-        getValue,
+        metalTestValue,
+        getTestValue,
       }}
     >
       {props.children}
-    </MetalApiContext.Provider>
+    </MetalApiTestContext.Provider>
   );
 };
