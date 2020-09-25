@@ -6,6 +6,7 @@ import { CollectionContext } from "../Collections/collectionProvider";
 import { MetalTypesContext } from "./MetalTypesProvider";
 import { PieceTypesContext } from "./PieceTypesProvider";
 import { UnitContext } from "../Units/UnitProvider";
+import { ImageContext } from "../Entries/ImageProvider";
 import { Metal } from "./Metal";
 import "./Metal.css";
 
@@ -13,6 +14,7 @@ import "./Metal.css";
 export const MetalList = (props) => {
   // Setting all data with useContext()
   const { metals, getMetals, addMetals, editMetals } = useContext(MetalContext);
+  const { uploadImage, loading, imageURL } = useContext(ImageContext);
   const { collectionOptions, getCollections, addCollections } = useContext(
     CollectionContext
   );
@@ -101,7 +103,7 @@ export const MetalList = (props) => {
 
   // Function to retrieve total collection weight
   const CollectionWeight = userMetals.map((metal) => {
-    return metal.weight;
+    return metal.weight*metal.qty;
   });
 
   let collectionWeightTotal = 0;
@@ -173,7 +175,7 @@ export const MetalList = (props) => {
     if (
       unitId === 0 ||
       collectionId === 0 ||
-      metalTypeId === 0 
+      metalTypeId === 0
       // pieceTypeId === 0
     ) {
       window.alert("Be sure to complete all sections");
@@ -182,6 +184,7 @@ export const MetalList = (props) => {
         editMetals({
           id: metal.id,
           name: name,
+          image: imageURL,
           weight: weight,
           qty: qty,
           purchasedPrice: purchasedPrice,
@@ -197,6 +200,7 @@ export const MetalList = (props) => {
       } else {
         addMetals({
           name: name,
+          image: imageURL,
           weight: weight,
           qty: qty,
           purchasedPrice: purchasedPrice,
@@ -223,7 +227,7 @@ export const MetalList = (props) => {
 
       <div className="collectionContainer">
         <div className="collectionValue">
-          <div className="collectionHeader">Collection Value</div>
+          <div className="collectionHeader">VauLT Value</div>
           <div className="collectionWorth">
             ${" "}
             {parseFloat(
@@ -506,6 +510,31 @@ export const MetalList = (props) => {
               ))}
             </select>
           </fieldset>
+
+          <fieldset>
+            <label className="formImage" htmlFor="image">
+              Upload Image:{" "}
+            </label>
+            <input
+              className="form-control"
+              id="image"
+              name="file"
+              type="file"
+              onChange={uploadImage}
+            />
+            {/* <img src={imageURL} style={{ width: `200px` }} alt="edit"></img>
+            {loading ? (
+              
+              <img src={imageURL} style={{ width: `200px` }} alt="loading" />
+            )}
+            ) : (
+            {editMode ? (
+              <img src={metal.image} style={{ width: `200px` }} alt="edit" />
+            ) : (
+              ``
+            )} */}
+          </fieldset>
+
           <fieldset>
             <div className="buttonsContainer">
               <button
@@ -514,7 +543,7 @@ export const MetalList = (props) => {
                 onClick={(evt) => {
                   evt.preventDefault();
                   addItem();
-                  addPieceDialog.current.close()
+                  addPieceDialog.current.close();
                 }}
               >
                 Add to your VauLT
@@ -522,8 +551,8 @@ export const MetalList = (props) => {
               <button
                 className=" Buttons Loginbutton--close"
                 onClick={(e) => {
-                  addPieceDialog.current.close()
-                  props.history.push("/collection")
+                  addPieceDialog.current.close();
+                  props.history.push("/collection");
                 }}
               >
                 Close
