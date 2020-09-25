@@ -3,12 +3,13 @@ import { Route } from "react-router-dom";
 import { MetalProvider } from "./Entries/MetalProvider";
 import { MetalList } from "./Entries/MetalList";
 import { Dashboard } from "./Dashboard/Dashboard";
-import { MetalApiProvider } from "./MetalAPI/MetalApiProvider";
+import { MetalApiTestProvider } from "./MetalAPI/MetalApiTestProvider";
 import { UnitProvider } from "./Units/UnitProvider";
 import { CollectionProvider } from "./Collections/collectionProvider";
 import { MetalTypesProvider } from "./Entries/MetalTypesProvider";
 import { PieceTypesProvider } from "./Entries/PieceTypesProvider";
-import { ImageProvider } from "./Entries/ImageProvider";
+import { ImageFrontProvider } from "./Entries/ImageProviderFront";
+import { ImageBackProvider } from "./Entries/ImageProviderBack";
 
 // test
 export const ApplicationViews = () => {
@@ -19,29 +20,31 @@ export const ApplicationViews = () => {
         <Dashboard />
       </Route>
 
-      <ImageProvider>
-        <MetalApiProvider>
-          <MetalTypesProvider>
-            <CollectionProvider>
-              <UnitProvider>
-                <MetalProvider>
-                  <PieceTypesProvider>
-                    <Route
-                      exact
-                      path="/collection"
-                      render={(props) => <MetalList {...props} />}
-                    />
-                    <Route
-                      path="/collection/edit/:metalId(\d+)"
-                      render={(props) => <MetalList {...props} />}
-                    />
-                  </PieceTypesProvider>
-                </MetalProvider>
-              </UnitProvider>
-            </CollectionProvider>
-          </MetalTypesProvider>
-        </MetalApiProvider>
-      </ImageProvider>
+      <ImageFrontProvider>
+        <ImageBackProvider>
+          <MetalApiTestProvider>
+            <MetalTypesProvider>
+              <CollectionProvider>
+                <UnitProvider>
+                  <MetalProvider>
+                    <PieceTypesProvider>
+                      <Route
+                        exact
+                        path="/collection"
+                        render={(props) => <MetalList {...props} />}
+                      />
+                      <Route
+                        path="/collection/edit/:metalId(\d+)"
+                        render={(props) => <MetalList {...props} />}
+                      />
+                    </PieceTypesProvider>
+                  </MetalProvider>
+                </UnitProvider>
+              </CollectionProvider>
+            </MetalTypesProvider>
+          </MetalApiTestProvider>
+        </ImageBackProvider>
+      </ImageFrontProvider>
       <Route
         path="/logout"
         render={(props) => {

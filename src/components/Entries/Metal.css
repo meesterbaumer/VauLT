@@ -5,7 +5,7 @@
 }
 
 .collectionValue {
-  background-color: rgba(0, 0, 0, 0.247);
+  background-color: rgba(0, 0, 0, 0.250);
   display: flex;
   border-radius: 10px;
   flex-direction: column;
@@ -14,6 +14,17 @@
   border: 2px solid black;
   text-align: center;
   /* justify-items: space-between; */
+}
+
+.blurred {
+  filter: blur(9px);
+  transition: 0.6s filter linear;
+  
+  /* opacity: .1; */
+}
+
+.blurred:hover {
+  filter: blur(0);
 }
 
 .collectionUpdate {
@@ -31,16 +42,24 @@
   
 }
 
+.flip--container {
+  width: 150px;
+  margin: auto;
+  /* border: solid black 2px; */
+}
+
 .singleMetal {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  justify-items: center;
+  justify-content: space-evenly;
+  /* justify-items: center; */
   border: solid black 2px;
+  background-color: rgba(0, 0, 0, 0.250);
   border-radius: .5rem;
   text-align: center;
   padding: .5rem;
   margin: .5rem;
+  height: 320px;
 }
 
 .editDeleteButtonContainer {
@@ -49,7 +68,12 @@
 
 }
 
-.metal--image {
+.metal--imageFront {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.metal--imageBack {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -131,4 +155,83 @@
 
 .unit {
   width: 30%;
+}
+
+/* Flip coins section */
+
+.flip-card {
+  background-color: transparent;
+  width: 150px;
+  height: 150px;
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(540deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-card-back {
+  transform: rotateY(540deg);
+}
+
+
+/* Flip details section */
+
+.flip-cardDetails {
+  width: 150px;
+  height: 150px;
+  perspective: 1000px;
+}
+
+.flip-card-innerDetails {
+  position: relative;
+  /* width: 100%;
+  height: 100%; */
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  
+}
+
+.flip-cardDetails:hover .flip-card-innerDetails {
+  transform: rotateY(180deg);
+}
+
+.flip-card-frontDetails, .flip-card-backDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  position: absolute;
+  width: 150px;
+  height: 130px;
+  margin-top: 10px;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  background-color: white;
+  border-radius: 10px;
+  
+}
+
+.flip-card-backDetails {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front {
+  margin-bottom: 10px;
 }
