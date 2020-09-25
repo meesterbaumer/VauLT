@@ -16,6 +16,17 @@
   /* justify-items: space-between; */
 }
 
+.blurred {
+  filter: blur(9px);
+  transition: 0.6s filter linear;
+  
+  /* opacity: .1; */
+}
+
+.blurred:hover {
+  filter: blur(0);
+}
+
 .collectionUpdate {
   font-size: .6rem;
 }

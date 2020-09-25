@@ -228,14 +228,14 @@ export const MetalList = (props) => {
       <div className="collectionContainer">
         <div className="collectionValue">
           <div className="collectionHeader">VauLT Value</div>
-          <div className="collectionWorth">
+          <div className="blurred collectionWorth">
             ${" "}
             {parseFloat(
               (1 / metalTestValue[0].rates.XAG) * collectionWeightTotal
             ).toFixed(2)}
           </div>
           <div className="collectionUpdate">
-            Data current as of{" "}
+            Last Update: <br></br> {" "}
             {new Date(metalTestValue[0].timestamp * 1000).toLocaleString(
               "en-US"
             )}
