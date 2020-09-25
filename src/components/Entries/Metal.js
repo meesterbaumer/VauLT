@@ -19,7 +19,10 @@ export const Metal = ({ metal, metalValue, props }) => {
       <div className="singleMetal">
         <div className="metal__name">{metal.name}</div>
         <div>
-        <img className="metal__image" src={metal.image} style={{width: `100px`}} alt=""></img>
+        <img className="metal__imageFront" src={metal.imageFront} style={{width: `100px`}} alt=""></img>
+        </div>
+        <div>
+        <img className="metal__imageBack" src={metal.imageBack} style={{width: `100px`}} alt=""></img>
         </div>
         <div className="metal__weight">
           Weight: {metal.weight} {metal.unit.name}

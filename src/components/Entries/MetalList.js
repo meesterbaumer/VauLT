@@ -6,7 +6,8 @@ import { CollectionContext } from "../Collections/collectionProvider";
 import { MetalTypesContext } from "./MetalTypesProvider";
 import { PieceTypesContext } from "./PieceTypesProvider";
 import { UnitContext } from "../Units/UnitProvider";
-import { ImageContext } from "../Entries/ImageProvider";
+import { ImageFrontContext } from "./ImageProviderFront";
+import { ImageBackContext } from "./ImageProviderBack";
 import { Metal } from "./Metal";
 import "./Metal.css";
 
@@ -14,7 +15,8 @@ import "./Metal.css";
 export const MetalList = (props) => {
   // Setting all data with useContext()
   const { metals, getMetals, addMetals, editMetals } = useContext(MetalContext);
-  const { uploadImage, loading, imageURL } = useContext(ImageContext);
+  const { uploadImageFront, loadingFront, imageURLFront } = useContext(ImageFrontContext);
+  const { uploadImageBack, loadingBack, imageURLBack } = useContext(ImageBackContext);
   const { collectionOptions, getCollections, addCollections } = useContext(
     CollectionContext
   );
@@ -184,7 +186,8 @@ export const MetalList = (props) => {
         editMetals({
           id: metal.id,
           name: name,
-          image: imageURL,
+          imageFront: imageURLFront,
+          imageBack: imageURLBack,
           weight: weight,
           qty: qty,
           purchasedPrice: purchasedPrice,
@@ -200,7 +203,8 @@ export const MetalList = (props) => {
       } else {
         addMetals({
           name: name,
-          image: imageURL,
+          imageFront: imageURLFront,
+          imageBack: imageURLBack,
           weight: weight,
           qty: qty,
           purchasedPrice: purchasedPrice,
@@ -235,7 +239,7 @@ export const MetalList = (props) => {
             ).toFixed(2)}
           </div>
           <div className="collectionUpdate">
-            Last Update: <br></br> {" "}
+            Last Update: <br></br>{" "}
             {new Date(metalTestValue[0].timestamp * 1000).toLocaleString(
               "en-US"
             )}
@@ -362,7 +366,7 @@ export const MetalList = (props) => {
       <dialog className="dialog dialog--addPiece" ref={addPieceDialog}>
         <form className="form--add">
           <div className="addHeader formText h3 mb-3 font-weight-normal">
-          {editMode ? `Edit your ${metal.name}`:"Add a piece to your VauLT"}
+            {editMode ? `Edit your ${metal.name}` : "Add a piece to your VauLT"}
           </div>
           <fieldset>
             <label className="formText" htmlFor="name">
@@ -512,30 +516,41 @@ export const MetalList = (props) => {
           </fieldset>
 
           <fieldset>
-            <label className="formText formImage" htmlFor="image">
-              Upload Image:{" "}
+            <label className="formText formImageFront" htmlFor="imageFront">
+              Upload Image Front:{" "}
             </label>
             <input
               className="form-control"
-              id="image"
-              name="file"
+              id="imageFront"
+              name="imageFront"
               type="file"
-              onChange={uploadImage}
+              onChange={uploadImageFront}
             />
 
-            {loading ? (<div className="formText">Loading</div>) : (<img src={imageURL} style={{ width: `50px` }} alt=""></img>)}
-
-            {/* <img src={imageURL} style={{ width: `200px` }} alt="edit"></img>
-            {loading ? (
-              
-              <img src={imageURL} style={{ width: `200px` }} alt="loading" />
+            {loadingFront ? (
+              <div className="formText">Loading</div>
+            ) : (
+              <img src={imageURLFront} style={{ width: `50px` }} alt=""></img>
             )}
+          </fieldset>
+
+          <fieldset>
+            <label className="formText formImageBack" htmlFor="imageBack">
+              Upload Image Back:{" "}
+            </label>
+            <input
+              className="form-control"
+              id="imageBack"
+              name="imageBack"
+              type="file"
+              onChange={uploadImageBack}
+            />
+
+            {loadingBack ? (
+              <div className="formText">Loading</div>
             ) : (
-            {editMode ? (
-              <img src={metal.image} style={{ width: `200px` }} alt="edit" />
-            ) : (
-              ``
-            )} */}
+              <img src={imageURLBack} style={{ width: `50px` }} alt=""></img>
+            )}
           </fieldset>
 
           <fieldset>
@@ -549,7 +564,7 @@ export const MetalList = (props) => {
                   addPieceDialog.current.close();
                 }}
               >
-                {editMode ? "Update your VauLT":"Add to your VauLT"}
+                {editMode ? "Update your VauLT" : "Add to your VauLT"}
               </button>
               <button
                 className=" Buttons Loginbutton--close"
