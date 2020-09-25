@@ -157,21 +157,17 @@
   width: 30%;
 }
 
-/* testing differnet flip stuff */
+/* Flip coins section */
 
 .flip-card {
   background-color: transparent;
   width: 150px;
   height: 150px;
   perspective: 1000px;
-  /* border-radius: 10px; */
-  /* margin: .5rem; */
 }
 
 .flip-card-inner {
   position: relative;
-  /* width: 100%;
-  height: 100%; */
   text-align: center;
   transition: transform 0.8s;
   transform-style: preserve-3d;
@@ -190,31 +186,12 @@
   backface-visibility: hidden;
 }
 
-.flip-card-front {
-  /* background-color: #bbb; */
-  /* color: black; */
-}
-
 .flip-card-back {
-  /* background-color: dodgerblue;
-  color: white; */
   transform: rotateY(540deg);
-  /* border-radius: 10px; */
 }
 
 
-/* .metal {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  }
-
-.metal__image {
-  width: 10rem;
-  border-radius: 10px;
-} */
-
-/* testing Details */
+/* Flip details section */
 
 .flip-cardDetails {
   background-color: transparent;
@@ -236,7 +213,7 @@
 }
 
 .flip-cardDetails:hover .flip-card-innerDetails {
-  transform: rotateY(540deg);
+  transform: rotateY(180deg);
 }
 
 .flip-card-frontDetails, .flip-card-backDetails {
@@ -250,12 +227,13 @@
 .flip-card-frontDetails {
   /* background-color: #bbb; */
   /* color: black; */
+  background-color: rgba(0, 0, 0, 0.308);
 }
 
 .flip-card-backDetails {
   /* background-color: dodgerblue;
   color: white; */
-  transform: rotateY(540deg);
+  transform: rotateY(180deg);
   /* border-radius: 10px; */
 }
 
