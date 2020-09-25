@@ -5,7 +5,7 @@
 }
 
 .collectionValue {
-  background-color: rgba(0, 0, 0, 0.247);
+  background-color: rgba(0, 0, 0, 0.250);
   display: flex;
   border-radius: 10px;
   flex-direction: column;
@@ -42,53 +42,24 @@
   
 }
 
-#f1_container {
-  position: relative;
-  /* border: solid 2px; */
-  margin: 10px auto;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-}
-#f1_container {
-  perspective: 1000;
-}
-#f1_card {
-  /* width: 100%; */
-  height: 100px;
-  transform-style: preserve-3d;
-  transition: all 1.0s linear;
-}
-#f1_container:hover #f1_card {
-  transform: rotateY(180deg);
-  /* box-shadow: -5px 5px 5px #aaa; */
-}
-.face {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-}
-.face.back {
-  display: block;
-  transform: rotateY(180deg);
-  box-sizing: border-box;
-  /* padding: 10px; */
-  /* color: white; */
-  text-align: center;
-  /* background-color: #aaa; */
+.flip--container {
+  width: 150px;
+  margin: auto;
+  /* border: solid black 2px; */
 }
 
 .singleMetal {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
   justify-items: center;
   border: solid black 2px;
+  background-color: rgba(0, 0, 0, 0.250);
   border-radius: .5rem;
   text-align: center;
   padding: .5rem;
   margin: .5rem;
+  height: 320px;
 }
 
 .editDeleteButtonContainer {
@@ -185,3 +156,117 @@
 .unit {
   width: 30%;
 }
+
+/* testing differnet flip stuff */
+
+.flip-card {
+  background-color: transparent;
+  width: 150px;
+  height: 150px;
+  perspective: 1000px;
+  /* border-radius: 10px; */
+  /* margin: .5rem; */
+}
+
+.flip-card-inner {
+  position: relative;
+  /* width: 100%;
+  height: 100%; */
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(540deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  /* background-color: #bbb; */
+  /* color: black; */
+}
+
+.flip-card-back {
+  /* background-color: dodgerblue;
+  color: white; */
+  transform: rotateY(540deg);
+  /* border-radius: 10px; */
+}
+
+
+/* .metal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  }
+
+.metal__image {
+  width: 10rem;
+  border-radius: 10px;
+} */
+
+/* testing Details */
+
+.flip-cardDetails {
+  background-color: transparent;
+  width: 150px;
+  height: 150px;
+  perspective: 1000px;
+  /* border-radius: 10px; */
+  /* margin: .5rem; */
+}
+
+.flip-card-innerDetails {
+  position: relative;
+  /* width: 100%;
+  height: 100%; */
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  
+}
+
+.flip-cardDetails:hover .flip-card-innerDetails {
+  transform: rotateY(540deg);
+}
+
+.flip-card-frontDetails, .flip-card-backDetails {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-card-frontDetails {
+  /* background-color: #bbb; */
+  /* color: black; */
+}
+
+.flip-card-backDetails {
+  /* background-color: dodgerblue;
+  color: white; */
+  transform: rotateY(540deg);
+  /* border-radius: 10px; */
+}
+
+
+/* .metal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  }
+
+.metal__image {
+  width: 10rem;
+  border-radius: 10px;
+} */
