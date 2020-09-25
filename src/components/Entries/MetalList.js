@@ -1,6 +1,6 @@
 // Imports
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { MetalApiTestContext } from "../MetalAPI/MetalApiProvider";
+import { MetalApiTestContext } from "../MetalAPI/MetalApiTestProvider";
 import { MetalContext } from "./MetalProvider";
 import { CollectionContext } from "../Collections/collectionProvider";
 import { MetalTypesContext } from "./MetalTypesProvider";
@@ -103,7 +103,7 @@ export const MetalList = (props) => {
 
   // Function to retrieve total collection weight
   const CollectionWeight = userMetals.map((metal) => {
-    return metal.weight*metal.qty;
+    return metal.weight * metal.qty;
   });
 
   let collectionWeightTotal = 0;
@@ -231,12 +231,12 @@ export const MetalList = (props) => {
           <div className="collectionWorth">
             ${" "}
             {parseFloat(
-              (1 / metalTestValue.rates.XAG) * collectionWeightTotal
+              (1 / metalTestValue[0].rates.XAG) * collectionWeightTotal
             ).toFixed(2)}
           </div>
           <div className="collectionUpdate">
             Data current as of{" "}
-            {new Date(metalTestValue.timestamp * 1000).toLocaleString(
+            {new Date(metalTestValue[0].timestamp * 1000).toLocaleString(
               "en-US"
             )}
           </div>
@@ -250,7 +250,7 @@ export const MetalList = (props) => {
           <div className="newCollectionContainer">
             <div>New Collection</div>
             <button onClick={newCollectionClicked} id="newCollection">
-              New Collection
+              Add Collection
             </button>
           </div>
           <div className="changeCollectionContainer">
@@ -294,7 +294,7 @@ export const MetalList = (props) => {
                   key={um.id}
                   metal={um}
                   props={props.history}
-                  metalValue={metalTestValue}
+                  metalValue={metalTestValue[0]}
                 />
               );
             })}
@@ -307,7 +307,7 @@ export const MetalList = (props) => {
                   key={fm.id}
                   metal={fm}
                   props={props.history}
-                  metalValue={metalTestValue}
+                  metalValue={metalTestValue[0]}
                 />
               );
             })}
@@ -362,7 +362,7 @@ export const MetalList = (props) => {
       <dialog className="dialog dialog--addPiece" ref={addPieceDialog}>
         <form className="form--add">
           <div className="addHeader formText h3 mb-3 font-weight-normal">
-            Add a piece to your collection
+          {editMode ? `Edit your ${metal.name}`:"Add a piece to your VauLT"}
           </div>
           <fieldset>
             <label className="formText" htmlFor="name">
@@ -512,7 +512,7 @@ export const MetalList = (props) => {
           </fieldset>
 
           <fieldset>
-            <label className="formImage" htmlFor="image">
+            <label className="formText formImage" htmlFor="image">
               Upload Image:{" "}
             </label>
             <input
@@ -522,6 +522,9 @@ export const MetalList = (props) => {
               type="file"
               onChange={uploadImage}
             />
+
+            {loading ? (<div className="formText">Loading</div>) : (<img src={imageURL} style={{ width: `50px` }} alt=""></img>)}
+
             {/* <img src={imageURL} style={{ width: `200px` }} alt="edit"></img>
             {loading ? (
               
@@ -546,7 +549,7 @@ export const MetalList = (props) => {
                   addPieceDialog.current.close();
                 }}
               >
-                Add to your VauLT
+                {editMode ? "Update your VauLT":"Add to your VauLT"}
               </button>
               <button
                 className=" Buttons Loginbutton--close"
