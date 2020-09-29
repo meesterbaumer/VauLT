@@ -4,22 +4,20 @@ import "./Dashboard.css";
 export const Dashboard = () => {
   return (
     <>
-      <div className="mainContainer">
-        <div className="dashboard">Dashboard</div>
-        <div className="chartContainer">
-            <iframe className="iframe"
-              scrolling="noscroll"
+      <div className="cont">
+        <div className="gridContainer">
+          <div className="chartContainer">
+            <iframe
               title="chart"
-              src="https://goldiraguide.org/chart/widget/chart-tabs.php?metal=silver&graph_width=220&graph_height=140&color_dark=000000&color_light=ffffff&color_graph=737373"
-              width="240"
-              height="285"
+              src="https://www.goldbroker.com/widget/live-price/XAG?currency=USD"
+              width="100%"
+              height="100%"
             ></iframe>
-        </div>
-        <div>
-          test1
-        </div>
-        <div>
-          test3
+          </div>
+          <div className="valueContainer">value</div>
+          <div className="recentContainer">recent</div>
+          <div className="favoriteContainer">favorite</div>
+          <div className="profitContainer">profit</div>
         </div>
       </div>
     </>
