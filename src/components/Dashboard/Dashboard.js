@@ -7,12 +7,14 @@ export const Dashboard = () => {
       <div className="cont">
         <div className="gridContainer">
           <div className="chartContainer">
-            <iframe
-              title="chart"
-              src="https://www.goldbroker.com/widget/live-price/XAG?currency=USD"
-              width="100%"
-              height="100%"
-            ></iframe>
+            <div className="iframeCont">
+              <iframe
+                title="chart"
+                src="https://www.goldbroker.com/widget/live-price/XAG?currency=USD"
+                width="100%"
+                height="100%"
+              ></iframe>
+            </div>
           </div>
           <div className="valueContainer">value</div>
           <div className="recentContainer">recent</div>
