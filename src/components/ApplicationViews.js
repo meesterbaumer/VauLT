@@ -17,7 +17,23 @@ export const ApplicationViews = () => {
     <>
       {/* Render the location list when http://localhost:3000/ */}
       <Route exact path="/">
-        <Dashboard />
+        <ImageFrontProvider>
+          <ImageBackProvider>
+            <MetalApiTestProvider>
+              <MetalTypesProvider>
+                <CollectionProvider>
+                  <UnitProvider>
+                    <MetalProvider>
+                      <PieceTypesProvider>
+                        <Dashboard />
+                      </PieceTypesProvider>
+                    </MetalProvider>
+                  </UnitProvider>
+                </CollectionProvider>
+              </MetalTypesProvider>
+            </MetalApiTestProvider>
+          </ImageBackProvider>
+        </ImageFrontProvider>
       </Route>
 
       <ImageFrontProvider>

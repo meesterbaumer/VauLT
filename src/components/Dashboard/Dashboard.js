@@ -1,7 +1,61 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import "./Dashboard.css";
+import { MetalApiTestContext } from "../MetalAPI/MetalApiTestProvider";
+import { MetalContext } from "../Entries/MetalProvider";
+import { CollectionContext } from "../Collections/collectionProvider";
+import { MetalTypesContext } from "../Entries/MetalTypesProvider";
+import { PieceTypesContext } from "../Entries/PieceTypesProvider";
+import { UnitContext } from "../Units/UnitProvider";
+// import { ImageFrontContext } from "./ImageProviderFront";
+// import { ImageBackContext } from "./ImageProviderBack";
+// import { Metal } from "./Metal";
+import "../Entries/Metal.css";
 
 export const Dashboard = () => {
+  const { metals, getMetals, addMetals } = useContext(MetalContext);
+  // const { uploadImageFront, loadingFront, imageURLFront } = useContext(ImageFrontContext);
+  // const { uploadImageBack, loadingBack, imageURLBack } = useContext(ImageBackContext);
+  const { collectionOptions, getCollections, addCollections } = useContext(
+    CollectionContext
+  );
+  const { unitOptions, getUnits } = useContext(UnitContext);
+  const { metalTypes, getMetalTypes } = useContext(MetalTypesContext);
+  const { pieceTypes, getPieceTypes } = useContext(PieceTypesContext);
+  const { metalTestValue } = useContext(MetalApiTestContext);
+  
+  // useEffect to get all necessary data from providers
+  useEffect(() => {
+    getMetals();
+    getUnits();
+    getCollections();
+    getMetalTypes();
+    getPieceTypes();
+  }, []);
+
+  // Function to just retrieve metals specific to the logged in user
+  const userMetals = metals
+    .filter((m) => {
+      return m.userId === parseInt(localStorage.vault_user);
+    })
+    .reverse();
+
+  console.log(userMetals);
+
+  // Function to just retrieve collections specific to the logged in user
+  const userCollections = collectionOptions.filter((c) => {
+    return c.userId === parseInt(localStorage.vault_user);
+  });
+
+  // Function to retrieve total collection weight
+  const CollectionWeight = userMetals.map((metal) => {
+    return metal.weight * metal.qty;
+  });
+
+  let collectionWeightTotal = 0;
+  for (const piece of CollectionWeight) {
+    collectionWeightTotal = collectionWeightTotal + piece;
+  }
+
   return (
     <>
       <div className="cont">
@@ -16,7 +70,23 @@ export const Dashboard = () => {
               ></iframe>
             </div>
           </div>
-          <div className="valueContainer">value</div>
+          <div className="valueContainer">
+            <div className="collectionValue">
+              <div className="collectionHeader">VauLT Value</div>
+              <div className="blurred collectionWorth">
+                ${" "}
+                {parseFloat(
+                  (1 / metalTestValue[0].rates.XAG) * collectionWeightTotal
+                ).toFixed(2)}
+              </div>
+              <div className="collectionUpdate">
+                Last Update: <br></br>{" "}
+                {new Date(metalTestValue[0].timestamp * 1000).toLocaleString(
+                  "en-US"
+                )}
+              </div>
+            </div>
+          </div>
           <div className="recentContainer">recent</div>
           <div className="favoriteContainer">favorite</div>
           <div className="profitContainer">profit</div>
