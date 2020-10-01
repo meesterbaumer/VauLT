@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from "react";
-import "./Dashboard.css";
 import { MetalApiTestContext } from "../MetalAPI/MetalApiTestProvider";
 import { MetalContext } from "../Entries/MetalProvider";
 import { CollectionContext } from "../Collections/collectionProvider";
@@ -8,10 +7,12 @@ import { PieceTypesContext } from "../Entries/PieceTypesProvider";
 import { UnitContext } from "../Units/UnitProvider";
 // import { ImageFrontContext } from "./ImageProviderFront";
 // import { ImageBackContext } from "./ImageProviderBack";
-// import { Metal } from "./Metal";
+import { Metal } from "../Entries/Metal";
+import "./Dashboard.css";
+import "./MetalDashboard.css";
 import "../Entries/Metal.css";
 
-export const Dashboard = () => {
+export const Dashboard = (props) => {
   const { metals, getMetals, addMetals } = useContext(MetalContext);
   // const { uploadImageFront, loadingFront, imageURLFront } = useContext(ImageFrontContext);
   // const { uploadImageBack, loadingBack, imageURLBack } = useContext(ImageBackContext);
@@ -22,7 +23,7 @@ export const Dashboard = () => {
   const { metalTypes, getMetalTypes } = useContext(MetalTypesContext);
   const { pieceTypes, getPieceTypes } = useContext(PieceTypesContext);
   const { metalTestValue } = useContext(MetalApiTestContext);
-  
+
   // useEffect to get all necessary data from providers
   useEffect(() => {
     getMetals();
@@ -39,7 +40,10 @@ export const Dashboard = () => {
     })
     .reverse();
 
-  console.log(userMetals);
+  console.log(userMetals[0]);
+
+  const recentMetals = userMetals.slice(0,3)
+  console.log(recentMetals)
 
   // Function to just retrieve collections specific to the logged in user
   const userCollections = collectionOptions.filter((c) => {
@@ -70,8 +74,8 @@ export const Dashboard = () => {
               ></iframe>
             </div>
           </div>
-          <div className="valueContainer">
-            <div className="collectionValue">
+          <div className="valueContainerDashboard">
+            <div className="collectionValueDashboard">
               <div className="collectionHeader">VauLT Value</div>
               <div className="blurred collectionWorth">
                 ${" "}
@@ -87,8 +91,34 @@ export const Dashboard = () => {
               </div>
             </div>
           </div>
-          <div className="recentContainer">recent</div>
-          <div className="favoriteContainer">favorite</div>
+          <div className="recentContainer">
+            <div className="metalsDashboard">
+              {recentMetals.map((um) => {
+                return (
+                  <Metal
+                    key={um.id}
+                    metal={um}
+                    props={props.history}
+                    metalValue={metalTestValue[0]}
+                  />
+                );
+              })}
+            </div>
+          </div>
+          <div className="favoriteContainer">
+          <div className="metals">
+              {recentMetals.map((um) => {
+                return (
+                  <Metal
+                    key={um.id}
+                    metal={um}
+                    props={props.history}
+                    metalValue={metalTestValue[0]}
+                  />
+                );
+              })}
+            </div>
+          </div>
           <div className="profitContainer">profit</div>
         </div>
       </div>
