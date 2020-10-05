@@ -73,9 +73,9 @@ export const Dashboard = (props) => {
             </div>
           </div>
           <div className="valueContainerDashboard">
-            <div className="collectionValueDashboard">
+            
               <div className="collectionHeader">VauLT Value</div>
-              <div className="blurred collectionWorth">
+              <div className="collectionWorth">
                 ${" "}
                 {parseFloat(
                   (1 / metalTestValue[0].rates.XAG) * collectionWeightTotal
@@ -87,10 +87,10 @@ export const Dashboard = (props) => {
                   "en-US"
                 )}
               </div>
-            </div>
+            
           </div>
           <div className="recentContainer">
-            <div className="metalsDashboard">
+            <div className="metalsDashboard">Recently Added to your collection:
               {recentMetals.map((um) => {
                 return (
                   <Metal

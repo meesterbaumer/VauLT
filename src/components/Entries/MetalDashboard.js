@@ -10,19 +10,18 @@ export const Metal = ({ metal, metalValue }) => {
 
   return (
     <>
-      <div className="singleMetal">
-        <div className="metal__nameDash">Name: {metal.name}</div>
-        <div className="metal__weightDash">
+      <div className="singleMetalDash">
+        <div className="metal nameDash">Name: {metal.name}</div>
+        <div className="metal weightDash">
           Weight: {metal.weight} {metal.unit.name}
         </div>
-        <div className="metal__qtyDash">qty: {metal.qty}</div>
-        <div className="metal__currentValueDash">
-          Current Value:<br></br> ${" "}
+        <div className="metal qtyDash">qty: {metal.qty}</div>
+        <div className="metal currentValueDash">
+          Current Value: ${" "}
           {parseFloat(correctRate * metal.weight).toFixed(2)}
         </div>
-        <br></br>
-        <div className="metal__profitDash">
-          Profit: $ <br></br>{" "}
+        <div className="metal profitDash">
+          Profit: ${" "}
           {parseFloat(correctRate * metal.weight).toFixed(2)}
         </div>
       </div>

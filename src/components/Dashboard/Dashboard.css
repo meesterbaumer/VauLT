@@ -8,19 +8,8 @@ body {
   
 }
 
-.gridContainer {
-  width: 100vh;
-  height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 190px 200px 300px 200px;
-  gap: 5px;
-  padding: 5px;
-  box-sizing: border-box;
-  /* display: flex;
-  flex-direction: column;
+.metalsDashboard {
   text-align: center;
-  align-items: center; */ 
 }
 
 .iframeCont{
@@ -30,10 +19,29 @@ body {
   height: 120px;
 }
 
-.gridContainer div {
-  padding: 10px;
-  
+.valueContainerDashboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
 }
+
+.gridContainer {
+  width: 100vh;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 190px 150px 300px 150px;
+  gap: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+  /* display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center; */ 
+}
+
+
 
 .chartContainer {
   grid-column: 1 / 3;
