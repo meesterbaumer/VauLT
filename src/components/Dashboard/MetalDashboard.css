@@ -8,20 +8,18 @@
 .valueContainerDashboard {
   display: flex;
   justify-content: center;
+  border: solid black 2px;
+  background-color: rgba(0, 0, 0, 0.250);
+  border-radius: 10px;
 }
 
 .collectionValueDashboard {
-  background-color: rgba(0, 0, 0, 0.250);
   display: flex;
   align-self: center;
   border-radius: 10px;
   flex-direction: column;
   width: 100%;
-  padding: 1rem;
-  margin: auto;
-  border: 2px solid black;
   text-align: center;
-  /* justify-items: space-between; */
 }
 
 .blurred {
@@ -35,7 +33,7 @@
   filter: blur(0);
 }
 
-.collectionUpdate {
+.collectionUpdateDash {
   font-size: .6rem;
 }
 
@@ -48,14 +46,13 @@
   flex-wrap: wrap;
   justify-content: center;
   height: fit-content;
+  border: solid black 2px;
+  background-color: rgba(0, 0, 0, 0.250);
+  border-radius: 10px;
   
 }
 
-.flip--container {
-  width: 150px;
-  margin: auto;
-  /* border: solid black 2px; */
-}
+
 
 .singleMetal {
   display: flex;
@@ -66,26 +63,7 @@
   background-color: rgba(0, 0, 0, 0.250);
   border-radius: .5rem;
   text-align: center;
-  padding: .5rem;
-  margin: .5rem;
-  height: 320px;
-}
 
-.editDeleteButtonContainer {
-  display: flex;
-  justify-content: space-evenly;
-
-}
-
-.metal--imageFront {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-.metal--imageBack {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .trioContainer {
@@ -95,13 +73,6 @@
   margin: 1.1rem;
 }
 
-.newCollectionContainer {
-  border: solid 2px black;
-  border-radius: .5rem;
-  text-align: center;
-  margin: 2px;
-  padding: 2px;
-}
 .recentContainer {
   overflow: auto;
 }
@@ -110,146 +81,7 @@
   overflow: auto;
 }
 
-.changeCollectionContainer {
-  border: solid 2px black;
-  border-radius: .5rem;
-  text-align: center;
-  margin: 2px;
-  padding: 2px;
-}
-
-.addPieceContainer {
-  border: solid 2px black;
-  border-radius: .5rem;
-  text-align: center;
-  margin: 2px;
-  padding: 2px;
-}
-
-.dialog--addPiece {
-  background-color: rgba(0, 0, 0, 0.75);
-  border-radius: 2rem;
-  margin-top: 20rem;
-  height: 30rem;
-  width: 20rem;
-  overflow: auto;
-}
-
-.dialog--newCollection {
-  background-color: rgba(0, 0, 0, 0.75);
-  border-radius: 2rem;
-  margin-top: 20rem;
-  height: 15rem;
-  width: 20rem;
-  overflow: auto;
-}
-
-.formText {
-  color: white;
-}
-.buttonsContainer {
-  display: flex;
-  justify-content: center;
-}
-.Buttons {
-  margin: 1rem;
-}
-
-.addHeader {
-  text-align: center;
-  font-size: 1.5rem;
-}
-
 .weightContainer {
   display: block;
   width: 94%;
 }
-
-.weight {
-  width: 70%;
-}
-
-.unit {
-  width: 30%;
-}
-
-/* Flip coins section */
-
-.flip-card {
-  background-color: transparent;
-  width: 150px;
-  height: 150px;
-  perspective: 1000px;
-}
-
-.flip-card-inner {
-  position: relative;
-  text-align: center;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-
-}
-
-.flip-card:hover .flip-card-inner {
-  transform: rotateY(540deg);
-}
-
-.flip-card-front, .flip-card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-.flip-card-back {
-  transform: rotateY(540deg);
-}
-
-
-/* Flip details section */
-
-.flip-cardDetails {
-  width: 150px;
-  height: 150px;
-  perspective: 1000px;
-}
-
-.flip-card-innerDetails {
-  position: relative;
-  /* width: 100%;
-  height: 100%; */
-  text-align: center;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-  
-}
-
-.flip-cardDetails:hover .flip-card-innerDetails {
-  transform: rotateY(180deg);
-}
-
-.flip-card-frontDetails, .flip-card-backDetails {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  position: absolute;
-  width: 150px;
-  height: 130px;
-  margin-top: 10px;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  background-color: white;
-  border-radius: 10px;
-  
-}
-
-.flip-card-backDetails {
-  transform: rotateY(180deg);
-}
-
-.flip-card-front {
-  margin-bottom: 10px;
-}
-
-

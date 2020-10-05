@@ -5,12 +5,10 @@ import { CollectionContext } from "../Collections/collectionProvider";
 import { MetalTypesContext } from "../Entries/MetalTypesProvider";
 import { PieceTypesContext } from "../Entries/PieceTypesProvider";
 import { UnitContext } from "../Units/UnitProvider";
-// import { ImageFrontContext } from "./ImageProviderFront";
-// import { ImageBackContext } from "./ImageProviderBack";
-import { Metal } from "../Entries/Metal";
+import { Metal } from "../Entries/MetalDashboard";
 import "./Dashboard.css";
-import "./MetalDashboard.css";
-import "../Entries/Metal.css";
+import "../Dashboard/MetalDashboard.css";
+
 
 export const Dashboard = (props) => {
   const { metals, getMetals, addMetals } = useContext(MetalContext);
@@ -83,7 +81,7 @@ export const Dashboard = (props) => {
                   (1 / metalTestValue[0].rates.XAG) * collectionWeightTotal
                 ).toFixed(2)}
               </div>
-              <div className="collectionUpdate">
+              <div className="collectionUpdateDash">
                 Last Update: <br></br>{" "}
                 {new Date(metalTestValue[0].timestamp * 1000).toLocaleString(
                   "en-US"
