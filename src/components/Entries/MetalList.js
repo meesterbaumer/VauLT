@@ -1,6 +1,6 @@
 // Imports
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { MetalApiTestContext } from "../MetalAPI/MetalApiTestProvider";
+import { MetalApiTestContext } from "../MetalAPI/MetalApiProvider";
 import { MetalContext } from "./MetalProvider";
 import { CollectionContext } from "../Collections/collectionProvider";
 import { MetalTypesContext } from "./MetalTypesProvider";
@@ -57,6 +57,7 @@ export const MetalList = (props) => {
   const newCollectionDialog = useRef();
   const collectionName = useRef();
   const chosenCollection = useRef(0);
+  const favorite = useRef();
 
   // useEffect to get all necessary data from providers
   useEffect(() => {
@@ -107,6 +108,8 @@ export const MetalList = (props) => {
   const CollectionWeight = userMetals.map((metal) => {
     return metal.weight * metal.qty;
   });
+
+  const pieceProfit = metalTestValue - metal.purchasedPrice
 
   let collectionWeightTotal = 0;
   for (const piece of CollectionWeight) {
@@ -166,7 +169,7 @@ export const MetalList = (props) => {
     const qty = parseInt(pieceQty.current.value);
     const purchasedPrice = parseInt(piecePurchasedPrice.current.value);
     const timestamp = Date.now();
-    const isFavorite = false;
+    const isFavorite = parseInt(favorite.current.value);
     const isHidden = false;
     const userId = parseInt(localStorage.vault_user);
     const collectionId = parseInt(chooseCollection.current.value);
@@ -192,7 +195,7 @@ export const MetalList = (props) => {
           qty: qty,
           purchasedPrice: purchasedPrice,
           timestamp: timestamp,
-          isFavorite: isFavorite,
+          isFavorite: (isFavorite)? true :false,
           isHidden: isHidden,
           userId: userId,
           collectionId: collectionId,
@@ -209,7 +212,7 @@ export const MetalList = (props) => {
           qty: qty,
           purchasedPrice: purchasedPrice,
           timestamp: timestamp,
-          isFavorite: isFavorite,
+          isFavorite: (isFavorite)? true :false,
           isHidden: isHidden,
           userId: userId,
           collectionId: collectionId,
@@ -235,12 +238,12 @@ export const MetalList = (props) => {
           <div className="blurred collectionWorth">
             ${" "}
             {parseFloat(
-              (1 / metalTestValue[0].rates.XAG) * collectionWeightTotal
+              (1 / metalTestValue.rates.XAG) * collectionWeightTotal
             ).toFixed(2)}
           </div>
           <div className="collectionUpdate">
             Last Update: <br></br>{" "}
-            {new Date(metalTestValue[0].timestamp * 1000).toLocaleString(
+            {new Date(metalTestValue.timestamp * 1000).toLocaleString(
               "en-US"
             )}
           </div>
@@ -298,7 +301,7 @@ export const MetalList = (props) => {
                   key={um.id}
                   metal={um}
                   props={props.history}
-                  metalValue={metalTestValue[0]}
+                  metalValue={metalTestValue}
                 />
               );
             })}
@@ -311,7 +314,7 @@ export const MetalList = (props) => {
                   key={fm.id}
                   metal={fm}
                   props={props.history}
-                  metalValue={metalTestValue[0]}
+                  metalValue={metalTestValue}
                 />
               );
             })}
@@ -512,6 +515,24 @@ export const MetalList = (props) => {
                   {c.name}
                 </option>
               ))}
+            </select>
+          </fieldset>
+
+          <fieldset>
+            <label className="formText" htmlFor="isFavorite">
+              Favorite Piece
+            </label>
+            <select
+              ref={favorite}
+              type="select"
+              name="isFavorite"
+              value={metal.isFavorite}
+              onChange={handleControlledInputChange}
+              className="form-control"
+              required
+            >
+              <option value="0">No</option>
+              <option value="1">Yes</option>
             </select>
           </fieldset>
 
