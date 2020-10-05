@@ -9,7 +9,6 @@ import { Metal } from "../Entries/MetalDashboard";
 import "./Dashboard.css";
 import "../Dashboard/MetalDashboard.css";
 
-
 export const Dashboard = (props) => {
   const { metals, getMetals, addMetals } = useContext(MetalContext);
   // const { uploadImageFront, loadingFront, imageURLFront } = useContext(ImageFrontContext);
@@ -40,8 +39,10 @@ export const Dashboard = (props) => {
 
   console.log(userMetals[0]);
 
-  const recentMetals = userMetals.slice(0,3)
-  console.log(recentMetals)
+  const userFavorites = userMetals.filter((uf) => uf.isFavorite === true);
+
+  const recentMetals = userMetals.slice(0, 3);
+  console.log(recentMetals);
 
   // Function to just retrieve collections specific to the logged in user
   const userCollections = collectionOptions.filter((c) => {
@@ -73,24 +74,23 @@ export const Dashboard = (props) => {
             </div>
           </div>
           <div className="valueContainerDashboard">
-            
-              <div className="collectionHeader">VauLT Value</div>
-              <div className="collectionWorth">
-                ${" "}
-                {parseFloat(
-                  (1 / metalTestValue[0].rates.XAG) * collectionWeightTotal
-                ).toFixed(2)}
-              </div>
-              <div className="collectionUpdateDash">
-                Last Update: <br></br>{" "}
-                {new Date(metalTestValue[0].timestamp * 1000).toLocaleString(
-                  "en-US"
-                )}
-              </div>
-            
+            <div className="collectionHeader">VauLT Value</div>
+            <div className="collectionWorth">
+              ${" "}
+              {parseFloat(
+                (1 / metalTestValue[0].rates.XAG) * collectionWeightTotal
+              ).toFixed(2)}
+            </div>
+            <div className="collectionUpdateDash">
+              Last Update: <br></br>{" "}
+              {new Date(metalTestValue[0].timestamp * 1000).toLocaleString(
+                "en-US"
+              )}
+            </div>
           </div>
           <div className="recentContainer">
-            <div className="metalsDashboard">Recently Added to your collection:
+            <div className="metalsDashboard">
+              Recently Added to your collection
               {recentMetals.map((um) => {
                 return (
                   <Metal
@@ -104,8 +104,10 @@ export const Dashboard = (props) => {
             </div>
           </div>
           <div className="favoriteContainer">
-          <div className="metals">
-              {recentMetals.map((um) => {
+            <div className="metalsDashboard">
+            Favorite Pieces
+            <div className="metals">
+              {userFavorites.map((um) => {
                 return (
                   <Metal
                     key={um.id}
@@ -115,6 +117,7 @@ export const Dashboard = (props) => {
                   />
                 );
               })}
+            </div>
             </div>
           </div>
           <div className="profitContainer">profit</div>
