@@ -9,6 +9,10 @@ body {
 }
 
 .metalsDashboard {
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
 }
 
@@ -40,8 +44,6 @@ body {
   text-align: center;
   align-items: center; */ 
 }
-
-
 
 .chartContainer {
   grid-column: 1 / 3;

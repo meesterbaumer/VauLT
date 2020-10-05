@@ -109,6 +109,8 @@ export const MetalList = (props) => {
     return metal.weight * metal.qty;
   });
 
+  const pieceProfit = metalTestValue - metal.purchasedPrice
+
   let collectionWeightTotal = 0;
   for (const piece of CollectionWeight) {
     collectionWeightTotal = collectionWeightTotal + piece;
@@ -529,8 +531,8 @@ export const MetalList = (props) => {
               className="form-control"
               required
             >
-              <option value="1">Yes</option>
               <option value="0">No</option>
+              <option value="1">Yes</option>
             </select>
           </fieldset>
 

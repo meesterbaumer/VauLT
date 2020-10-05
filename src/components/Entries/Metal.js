@@ -11,6 +11,8 @@ export const Metal = ({ metal, metalValue, props }) => {
 
   const rates = metalValue.rates;
   const correctRate = 1 / rates.XAG;
+  const pieceProfit = correctRate - metal.purchasedPrice
+  console.log(pieceProfit)
 
   return (
     <>
@@ -49,13 +51,13 @@ export const Metal = ({ metal, metalValue, props }) => {
             </div>
             <div class="flip-card-backDetails">
               <div className="metal__currentValue">
-                Current Value: $ <br></br>{" "}
-                {parseFloat(correctRate * metal.weight).toFixed(2)}
+                Current Value:<br></br>${" "}
+                {parseFloat(correctRate * metal.weight * metal.qty).toFixed(2)}
               </div>
               <br></br>
               <div className="metal__currentValue">
-                Profit: $ <br></br>{" "}
-                {parseFloat(correctRate * metal.weight).toFixed(2)}
+                Profit:<br></br>${" "}
+                {parseFloat(pieceProfit * metal.weight * metal.qty).toFixed(2)}
               </div>
             </div>
           </div>

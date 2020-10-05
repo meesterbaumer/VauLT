@@ -13,6 +13,16 @@
   border-radius: 10px;
 }
 
+.profitContainer {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: space-between;
+  border: solid black 2px;
+  background-color: rgba(0, 0, 0, 0.250);
+  border-radius: 10px;
+}
+
 .collectionValueDashboard {
   display: flex;
   align-self: center;
@@ -44,7 +54,7 @@
 .metalsDashboard {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  /* justify-content: center; */
   height: fit-content;
   border: solid black 2px;
   background-color: rgba(0, 0, 0, 0.250);
@@ -59,10 +69,10 @@
 .singleMetalDash {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
   width: 100%;
   margin: 5px;
-  /* justify-items: center; */
+  justify-items: center;
   border: solid black 2px;
   background-color: white;
   border-radius: .5rem;
@@ -81,7 +91,9 @@
   overflow: auto;
 }
 
-
+.favoriteContainer {
+  overflow: auto;
+}
 
 .weightContainer {
   display: block;

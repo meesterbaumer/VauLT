@@ -53,11 +53,20 @@ export const Dashboard = (props) => {
   const CollectionWeight = userMetals.map((metal) => {
     return metal.weight * metal.qty;
   });
-
   let collectionWeightTotal = 0;
   for (const piece of CollectionWeight) {
     collectionWeightTotal = collectionWeightTotal + piece;
   }
+
+  const CollectionCost = userMetals.map((metal) => {
+    return metal.purchasedPrice * metal.weight * metal.qty
+  })
+  let collectionCostTotal = 0;
+  for (const piece of CollectionCost) {
+    collectionCostTotal = collectionCostTotal + piece
+  }
+  console.log(collectionCostTotal)
+
 
   return (
     <>
@@ -91,36 +100,54 @@ export const Dashboard = (props) => {
           <div className="recentContainer">
             <div className="metalsDashboard">
               Recently Added to your collection
-              {recentMetals.map((um) => {
-                return (
-                  <Metal
-                    key={um.id}
-                    metal={um}
-                    props={props.history}
-                    metalValue={metalTestValue[0]}
-                  />
-                );
-              })}
+              <div className="metals">
+                {recentMetals.map((um) => {
+                  return (
+                    <Metal
+                      key={um.id}
+                      metal={um}
+                      props={props.history}
+                      metalValue={metalTestValue[0]}
+                    />
+                  );
+                })}
+              </div>
             </div>
           </div>
           <div className="favoriteContainer">
             <div className="metalsDashboard">
-            Favorite Pieces
-            <div className="metals">
-              {userFavorites.map((um) => {
-                return (
-                  <Metal
-                    key={um.id}
-                    metal={um}
-                    props={props.history}
-                    metalValue={metalTestValue[0]}
-                  />
-                );
-              })}
-            </div>
+              Favorite Pieces
+              <div className="metals">
+                {userFavorites.map((um) => {
+                  return (
+                    <Metal
+                      key={um.id}
+                      metal={um}
+                      props={props.history}
+                      metalValue={metalTestValue[0]}
+                    />
+                  );
+                })}
+              </div>
             </div>
           </div>
-          <div className="profitContainer">profit</div>
+          <div className="profitContainer">
+            
+              <div className="collectionHeader">VauLT Profit</div>
+              <div className="collectionWorth">
+                ${" "}
+                {parseFloat(
+                  ((1 / metalTestValue[0].rates.XAG) * collectionWeightTotal) - collectionCostTotal
+                ).toFixed(2)}
+              </div>
+              <div className="collectionUpdateDash">
+                Last Update: <br></br>{" "}
+                {new Date(metalTestValue[0].timestamp * 1000).toLocaleString(
+                  "en-US"
+                )}
+              </div>
+            
+          </div>
         </div>
       </div>
     </>
