@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { MetalApiTestContext } from "../MetalAPI/MetalApiTestProvider";
+import { MetalApiTestContext } from "../MetalAPI/MetalApiProvider";
 import { MetalContext } from "../Entries/MetalProvider";
 import { CollectionContext } from "../Collections/collectionProvider";
 import { MetalTypesContext } from "../Entries/MetalTypesProvider";
@@ -87,12 +87,12 @@ export const Dashboard = (props) => {
             <div className="collectionWorth">
               ${" "}
               {parseFloat(
-                (1 / metalTestValue[0].rates.XAG) * collectionWeightTotal
+                (1 / metalTestValue.rates.XAG) * collectionWeightTotal
               ).toFixed(2)}
             </div>
             <div className="collectionUpdateDash">
               Last Update: <br></br>{" "}
-              {new Date(metalTestValue[0].timestamp * 1000).toLocaleString(
+              {new Date(metalTestValue.timestamp * 1000).toLocaleString(
                 "en-US"
               )}
             </div>
@@ -107,7 +107,7 @@ export const Dashboard = (props) => {
                       key={um.id}
                       metal={um}
                       props={props.history}
-                      metalValue={metalTestValue[0]}
+                      metalValue={metalTestValue}
                     />
                   );
                 })}
@@ -124,7 +124,7 @@ export const Dashboard = (props) => {
                       key={um.id}
                       metal={um}
                       props={props.history}
-                      metalValue={metalTestValue[0]}
+                      metalValue={metalTestValue}
                     />
                   );
                 })}
@@ -137,12 +137,12 @@ export const Dashboard = (props) => {
               <div className="collectionWorth">
                 ${" "}
                 {parseFloat(
-                  ((1 / metalTestValue[0].rates.XAG) * collectionWeightTotal) - collectionCostTotal
+                  ((1 / metalTestValue.rates.XAG) * collectionWeightTotal) - collectionCostTotal
                 ).toFixed(2)}
               </div>
               <div className="collectionUpdateDash">
                 Last Update: <br></br>{" "}
-                {new Date(metalTestValue[0].timestamp * 1000).toLocaleString(
+                {new Date(metalTestValue.timestamp * 1000).toLocaleString(
                   "en-US"
                 )}
               </div>
