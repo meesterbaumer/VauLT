@@ -57,6 +57,7 @@ export const MetalList = (props) => {
   const newCollectionDialog = useRef();
   const collectionName = useRef();
   const chosenCollection = useRef(0);
+  const favorite = useRef();
 
   // useEffect to get all necessary data from providers
   useEffect(() => {
@@ -166,7 +167,7 @@ export const MetalList = (props) => {
     const qty = parseInt(pieceQty.current.value);
     const purchasedPrice = parseInt(piecePurchasedPrice.current.value);
     const timestamp = Date.now();
-    const isFavorite = false;
+    const isFavorite = parseInt(favorite.current.value);
     const isHidden = false;
     const userId = parseInt(localStorage.vault_user);
     const collectionId = parseInt(chooseCollection.current.value);
@@ -192,7 +193,7 @@ export const MetalList = (props) => {
           qty: qty,
           purchasedPrice: purchasedPrice,
           timestamp: timestamp,
-          isFavorite: isFavorite,
+          isFavorite: (isFavorite)? true :false,
           isHidden: isHidden,
           userId: userId,
           collectionId: collectionId,
@@ -209,7 +210,7 @@ export const MetalList = (props) => {
           qty: qty,
           purchasedPrice: purchasedPrice,
           timestamp: timestamp,
-          isFavorite: isFavorite,
+          isFavorite: (isFavorite)? true :false,
           isHidden: isHidden,
           userId: userId,
           collectionId: collectionId,
@@ -512,6 +513,24 @@ export const MetalList = (props) => {
                   {c.name}
                 </option>
               ))}
+            </select>
+          </fieldset>
+
+          <fieldset>
+            <label className="formText" htmlFor="isFavorite">
+              Favorite Piece
+            </label>
+            <select
+              ref={favorite}
+              type="select"
+              name="isFavorite"
+              value={metal.isFavorite}
+              onChange={handleControlledInputChange}
+              className="form-control"
+              required
+            >
+              <option value="1">Yes</option>
+              <option value="0">No</option>
             </select>
           </fieldset>
 
