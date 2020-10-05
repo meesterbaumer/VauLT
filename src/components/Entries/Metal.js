@@ -19,9 +19,9 @@ export const Metal = ({ metal, metalValue, props }) => {
       {/* Flippy Metals */}
 
       <div className="singleMetal">
-        <div class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-card-front metal">
+        <div className="flip-card">
+          <div className="flip-card-inner">
+            <div className="flip-card-front metal">
               <img
                 className="metal__imageFront"
                 src={metal.imageFront}
@@ -29,7 +29,7 @@ export const Metal = ({ metal, metalValue, props }) => {
                 alt=""
               ></img>
             </div>
-            <div class="flip-card-back">
+            <div className="flip-card-back">
               <img
                 className="metal__imageBack"
                 src={metal.imageBack}
@@ -40,16 +40,16 @@ export const Metal = ({ metal, metalValue, props }) => {
           </div>
         </div>
 
-        <div class="flip-cardDetails">
-          <div class="flip-card-innerDetails">
-            <div class="flip-card-frontDetails metalDetails">
+        <div className="flip-cardDetails">
+          <div className="flip-card-innerDetails">
+            <div className="flip-card-frontDetails metalDetails">
               <div className="metal__name">{metal.name}</div>
               <div className="metal__weight">
                 Weight: {metal.weight} {metal.unit.name}
               </div>
               <div className="metal__qty">qty: {metal.qty}</div>
             </div>
-            <div class="flip-card-backDetails">
+            <div className="flip-card-backDetails">
               <div className="metal__currentValue">
                 Current Value:<br></br>${" "}
                 {parseFloat(correctRate * metal.weight * metal.qty).toFixed(2)}

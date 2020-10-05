@@ -137,7 +137,7 @@ export const Dashboard = (props) => {
               <div className="collectionWorth">
                 ${" "}
                 {parseFloat(
-                  ((1 / metalTestValue.rates.XAG) * collectionWeightTotal) - collectionCostTotal
+                  ((1 / metalTestValue[0].rates.XAG) * collectionWeightTotal) - collectionCostTotal
                 ).toFixed(2)}
               </div>
               <div className="collectionUpdateDash">
