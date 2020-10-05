@@ -3,7 +3,7 @@ import { Route } from "react-router-dom";
 import { MetalProvider } from "./Entries/MetalProvider";
 import { MetalList } from "./Entries/MetalList";
 import { Dashboard } from "./Dashboard/Dashboard";
-import { MetalApiProvider } from "./MetalAPI/MetalApiProvider";
+import { MetalApiTestProvider } from "./MetalAPI/MetalApiTestProvider";
 import { UnitProvider } from "./Units/UnitProvider";
 import { CollectionProvider } from "./Collections/collectionProvider";
 import { MetalTypesProvider } from "./Entries/MetalTypesProvider";
@@ -19,7 +19,7 @@ export const ApplicationViews = () => {
       <Route exact path="/">
         <ImageFrontProvider>
           <ImageBackProvider>
-            <MetalApiProvider>
+            <MetalApiTestProvider>
               <MetalTypesProvider>
                 <CollectionProvider>
                   <UnitProvider>
@@ -31,14 +31,14 @@ export const ApplicationViews = () => {
                   </UnitProvider>
                 </CollectionProvider>
               </MetalTypesProvider>
-            </MetalApiProvider>
+            </MetalApiTestProvider>
           </ImageBackProvider>
         </ImageFrontProvider>
       </Route>
 
       <ImageFrontProvider>
         <ImageBackProvider>
-          <MetalApiProvider>
+          <MetalApiTestProvider>
             <MetalTypesProvider>
               <CollectionProvider>
                 <UnitProvider>
@@ -58,7 +58,7 @@ export const ApplicationViews = () => {
                 </UnitProvider>
               </CollectionProvider>
             </MetalTypesProvider>
-          </MetalApiProvider>
+          </MetalApiTestProvider>
         </ImageBackProvider>
       </ImageFrontProvider>
       <Route
