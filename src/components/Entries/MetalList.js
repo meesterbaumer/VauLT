@@ -482,7 +482,7 @@ export const MetalList = (props) => {
           </fieldset>
           <fieldset>
             <label className="formText" htmlFor="purchasePrice">
-              Purchased Price
+              Purchased Price Per OZ.
             </label>
             <input
               ref={piecePurchasedPrice}
